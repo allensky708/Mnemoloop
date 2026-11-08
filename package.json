@@ -1,6 +1,6 @@
 {
 	"name": "mnemoloop-zh",
-	"version": "2.1.4",
+	"version": "2.1.5",
 	"description": "Mnemoloop 简体中文版：本地优先的 FSRS 间隔重复 Obsidian 插件。",
 	"homepage": "https://github.com/allensky708/Mnemoloop#readme",
 	"bugs": {

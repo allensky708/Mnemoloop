@@ -5,7 +5,7 @@
 
 [English](./README.en.md) | **简体中文**
 
-这是 [Mnemoloop](https://github.com/Marco-Pozzecco/mnemoloop-plugin) 的简体中文本地化版本，基于上游 `2.1.1`，使用 i18n 实现中英双语界面。当前版本 **2.1.4**，插件 ID 为 `mnemoloop-zh`，名称为 **Mnemoloop(中文版)**。
+这是 [Mnemoloop](https://github.com/Marco-Pozzecco/mnemoloop-plugin) 的简体中文本地化版本，基于上游 `2.1.1`，使用 i18n 实现中英双语界面。当前版本 **2.1.5**，插件 ID 为 `mnemoloop-zh`，名称为 **Mnemoloop(中文版)**。
 
 界面语言默认跟随 Obsidian，也可以在 **设置 → Mnemoloop(中文版) → Language** 中手动选择 `跟随 Obsidian`、`English` 或 `简体中文`。
 
@@ -53,7 +53,7 @@ Mnemoloop 把 FSRS 调度直接带进 Obsidian。它与现代 Anki 使用同类�
 
 ### 手动安装（推荐用于本汉化版）
 
-1. 直接下载本仓库根目录的 `main.js`、`manifest.json`、`styles.css`，或下载 `release/mnemoloop-zh-2.1.4.zip` 解压使用。
+1. 直接下载本仓库根目录的 `main.js`、`manifest.json`、`styles.css`，或下载 `release/mnemoloop-zh-2.1.5.zip` 解压使用。
 2. 在仓库中创建目录：
 
    ```text

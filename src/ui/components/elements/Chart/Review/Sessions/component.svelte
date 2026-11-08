@@ -122,7 +122,7 @@
 								{end}
 								cellSize={monthCellSize}
 								{monthsPerRow}
-								monthLabel={true}
+								monthLabel={{ textAnchor: 'middle', dx: monthCellSize * 3.5 }}
 								tooltip
 							>
 								{#snippet children({ cells, cellSize })}
