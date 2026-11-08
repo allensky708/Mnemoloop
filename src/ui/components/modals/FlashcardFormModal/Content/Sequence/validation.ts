@@ -1,5 +1,6 @@
 import { CardType } from '@/schemas';
 import type { FlashcardContent } from '@/schemas';
+import { tr } from '@/i18n';
 
 /**
  * Validate sequence form state.
@@ -12,10 +13,10 @@ import type { FlashcardContent } from '@/schemas';
  * Returns null on success, error string on failure.
  */
 export function validateSequence(question: string, steps: string[]): string | null {
-	if (!question.trim()) return 'Question is required.';
-	if (steps.filter((s) => s.trim()).length < 2) return 'At least 2 steps are required.';
+	if (!question.trim()) return tr('Question is required.');
+	if (steps.filter((s) => s.trim()).length < 2) return tr('At least 2 steps are required.');
 	const firstEmpty = steps.findIndex((s) => !s.trim());
-	if (firstEmpty !== -1) return `Step ${firstEmpty + 1} must be filled.`;
+	if (firstEmpty !== -1) return tr('Step {number} must be filled.', { number: firstEmpty + 1 });
 	return null;
 }
 

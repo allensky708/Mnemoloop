@@ -531,3 +531,15 @@ EventBus.instance.publish(new MyEvent(data));
 6. **Build-time constants**: `__DEV__` and `__LOG_LEVEL__` are injected by Vite `define` block (see `vite.config.ts`). `src/env.ts` exports `LogLevel` enum and `env` object for runtime log level control. These are NOT available in tests — mock as needed.
 7. **Production build**: Uses `tsc -p tsconfig.build.json` (which sets `noEmit: false`, overriding main tsconfig's `noEmit: true`) then Vite bundles. The type check step before bundling ensures all imports resolve.
 8. **CI**: Runs on Node 22. Pipeline defined in `apps/plugin/.github/workflows/release.yml`. Uses `semantic-release` for automated versioning.
+
+---
+
+## Internationalization (i18n)
+
+The plugin ships with English and Simplified Chinese UI strings.
+
+- Core: `src/i18n/index.ts` exposes a reactive Svelte store `t` (use `$t('English source')` in components), a plural-aware `tn` store (use `$tn(count, one, other, { count })`), and non-reactive `tr` / `trn` helpers for plain TypeScript (commands, notices, handlers).
+- Translations: `src/i18n/locales/zh.ts` maps the English source string to Chinese. The English string is the key; a missing entry falls back to English. Placeholders use `{name}` syntax.
+- Language setting: `language: 'auto' | 'en' | 'zh'` in `PluginSettingsSchema`, surfaced at the top of the settings tab. `initI18n()` runs at the start of `onload()` before commands are registered; `$t` updates mounted Svelte views immediately.
+- Adding UI text: write the English string in the component via `$t('...')`, then add a Chinese entry to `zh.ts`. Do not hard-code Chinese in components.
+- Keep static text nodes translatable: use `{$t('...')}` rather than plain text, and use `$t()` for `aria-label`, `placeholder`, and `title` attributes too.

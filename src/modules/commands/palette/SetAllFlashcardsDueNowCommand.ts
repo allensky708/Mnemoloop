@@ -5,10 +5,11 @@ import { ParserKey } from '@/types/parsers';
 import { WriterKey } from '@/types/writers';
 import { Notice } from 'obsidian';
 import { env } from '@/env';
+import { tr } from '@/i18n';
 
 export class SetAllFlashcardsDueNowCommand extends BaseCommand {
 	readonly id = 'set-all-flashcards-due-now';
-	readonly name = 'Set all flashcards due to now [DEBUG]';
+	readonly name = tr('Set all flashcards due to now [DEBUG]');
 
 	protected onRegister(): void {
 		if (env.mode === 'production') {
@@ -29,14 +30,14 @@ export class SetAllFlashcardsDueNowCommand extends BaseCommand {
 		const writer = this.writers.get(WriterKey.flashcard);
 
 		if (!flashcardIndex || !parser || !writer) {
-			new Notice('Error: Flashcard dependencies not found');
+			new Notice(tr('Error: Flashcard dependencies not found'));
 			return;
 		}
 
 		const allFlashcards = flashcardIndex.getAll();
 
 		if (allFlashcards.length === 0) {
-			new Notice('No flashcards found');
+			new Notice(tr('No flashcards found'));
 			return;
 		}
 
@@ -65,10 +66,10 @@ export class SetAllFlashcardsDueNowCommand extends BaseCommand {
 			// Save index changes
 			await flashcardIndex.save();
 
-			new Notice(`Updated ${updatedCount} flashcard(s) due date to now`);
+			new Notice(tr('Updated {count} flashcard(s) due date to now', { count: updatedCount }));
 		} catch (error) {
 			const message = error instanceof Error ? error.message : 'Unknown error';
-			new Notice(`Error updating flashcards: ${message}`);
+			new Notice(tr('Error updating flashcards: {message}', { message }));
 			console.error('SetAllFlashcardsDueNowCommand error:', error);
 		}
 	}

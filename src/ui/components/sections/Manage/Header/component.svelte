@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import { Button, Icon } from '@/ui/components/elements';
 	import type ManageHeaderProps from './types';
 
@@ -8,14 +9,14 @@
 		totalCount === 0
 			? ''
 			: visibleCount === totalCount
-				? `${totalCount} card${totalCount === 1 ? '' : 's'}`
-				: `${visibleCount} of ${totalCount} cards`,
+				? $tn(totalCount, '{count} card', '{count} cards', { count: totalCount })
+				: $t('{shown} of {total} cards', { shown: visibleCount, total: totalCount }),
 	);
 </script>
 
 <header class="ml-manage__header {className ?? ''}">
 	<div class="ml-manage__header-group">
-		<h2 class="ml-manage__title">Manage flashcards</h2>
+		<h2 class="ml-manage__title">{$t('Manage flashcards')}</h2>
 		{#if summary}
 			<p class="ml-manage__subtitle" aria-live="polite">{summary}</p>
 		{/if}
@@ -24,7 +25,7 @@
 		{#snippet icon()}
 			<Icon name="plus" size={14} />
 		{/snippet}
-		Add
+		{$t('Add')}
 	</Button>
 </header>
 

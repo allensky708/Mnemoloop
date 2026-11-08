@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { Icon } from '@/ui/components';
 	import Self from './component.svelte';
 	import type DeckTreeNodeProps from './types';
@@ -41,7 +42,7 @@
 				class="ml-deck-tree-node__chevron"
 				onclick={handleToggle}
 				type="button"
-				aria-label={node.isExpanded ? 'Collapse' : 'Expand'}
+				aria-label={node.isExpanded ? $t('Collapse') : $t('Expand')}
 			>
 				<Icon name={node.isExpanded ? 'chevron-down' : 'chevron-right'} size={14} />
 			</button>
@@ -49,7 +50,7 @@
 			<span class="ml-deck-tree-node__spacer"></span>
 		{/if}
 
-		<span class="ml-deck-tree-node__name">{node.name}</span>
+		<span class="ml-deck-tree-node__name">{node.name === 'Uncategorized' ? $t('Uncategorized') : node.name}</span>
 
 		{#if node.dueNow > 0}
 			<span class="ml-deck-tree-node__badge">{node.dueNow}</span>

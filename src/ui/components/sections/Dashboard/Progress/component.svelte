@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import { ProgressBar } from '@/ui/components';
 	import type DashboardProgressProps from './types';
 
@@ -12,20 +13,20 @@
 
 <section class="ml-dashboard__progress {className}" aria-labelledby="daily-goal-title">
 	<div class="ml-section-header">
-		<h2 id="daily-goal-title" class="ml-section-title">Daily goal</h2>
+		<h2 id="daily-goal-title" class="ml-section-title">{$t('Daily goal')}</h2>
 		<span class="ml-section-value" aria-live="polite">
-			{todayProgress.total_count} / {stats.flashcard.daily_goal} cards
+			{todayProgress.total_count} / {stats.flashcard.daily_goal} {$t('cards')}
 		</span>
 	</div>
 	<ProgressBar
 		value={todayProgress.total_count}
 		max={stats.flashcard.daily_goal}
 		showPercentage
-		ariaLabel="Daily review progress"
+		ariaLabel={$t('Daily review progress')}
 	/>
 	{#if hasDueCards}
 		<p class="ml-progress-estimate">
-			Estimated time: <strong>{stats.flashcard.expected_review_time} min</strong> to finish due cards
+			{$t('Estimated time:')} <strong>{stats.flashcard.expected_review_time} {$t('min')}</strong> {$t('to finish due cards')}
 		</p>
 	{/if}
 </section>

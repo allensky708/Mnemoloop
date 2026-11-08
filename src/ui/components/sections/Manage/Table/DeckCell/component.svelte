@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { Chip, Combobox, Icon } from '@/ui/components/elements';
 	import { canCreateNew, filterOptions } from '@/ui/components/elements/Combobox/utils';
 	import type ManageDeckCellProps from './types';
@@ -91,13 +92,13 @@
 >
 	<div class="ml-manage-deck-cell__display" bind:this={customAnchor}>
 		{#if card.decks.length === 0}
-			<span class="ml-manage-deck-cell__muted">No decks</span>
+			<span class="ml-manage-deck-cell__muted">{$t('No decks')}</span>
 		{:else}
 			{#each card.decks as deck (deck)}
-				<Chip removeLabel={`Remove ${deck}`} onDelete={() => onRemoveDeck(deck)}>{deck}</Chip>
+				<Chip removeLabel={$t('Remove {label}', { label: deck })} onDelete={() => onRemoveDeck(deck)}>{deck}</Chip>
 			{/each}
 		{/if}
-		<Combobox.Trigger class="ml-manage-deck-cell__plus" ariaLabel={`Add deck to ${card.file}`}>
+		<Combobox.Trigger class="ml-manage-deck-cell__plus" ariaLabel={$t('Add deck to {label}', { label: card.file })}>
 			<Icon name="plus" size={14} />
 		</Combobox.Trigger>
 	</div>
@@ -110,8 +111,8 @@
 		>
 			<Combobox.Input
 				bind:ref={inputEl}
-				placeholder="Search or create deck"
-				aria-label="Search or create deck"
+				placeholder={$t('Search or create deck')}
+				aria-label={$t('Search or create deck')}
 				oninput={(event) => (search = event.currentTarget.value)}
 				onkeydown={handleKeydown}
 			/>
@@ -120,10 +121,10 @@
 					<Combobox.Item value={option.value} label={option.label} />
 				{/each}
 				{#if filteredOptions.length === 0 && !canCreate}
-					<Combobox.Empty>No decks found</Combobox.Empty>
+					<Combobox.Empty>{$t('No decks found')}</Combobox.Empty>
 				{/if}
 				{#if canCreate}
-					<Combobox.Create value={trimmedSearch} label={`Create "${trimmedSearch}"`} />
+					<Combobox.Create value={trimmedSearch} label={$t('Create "{query}"', { query: trimmedSearch })} />
 				{/if}
 			</Combobox.Viewport>
 		</Combobox.Content>

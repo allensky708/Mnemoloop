@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { onMount } from 'svelte';
 	import type { Snippet } from 'svelte';
 
@@ -75,12 +76,12 @@
 
 <svelte:window onkeydown={handleWindowKeyDown} />
 
-<div class="ml-occlusion-viewer" role="dialog" aria-modal="true" aria-label="Expanded image">
+<div class="ml-occlusion-viewer" role="dialog" aria-modal="true" aria-label={$t('Expanded image')}>
 	<div class="ml-occlusion-viewer__toolbar">
 		<button
 			type="button"
 			class="ml-occlusion-viewer__tool"
-			aria-label="Zoom out"
+			aria-label={$t('Zoom out')}
 			onclick={() => zoomBy(-ZOOM_STEP)}
 		>
 			−
@@ -89,7 +90,7 @@
 		<button
 			type="button"
 			class="ml-occlusion-viewer__tool"
-			aria-label="Zoom in"
+			aria-label={$t('Zoom in')}
 			onclick={() => zoomBy(ZOOM_STEP)}
 		>
 			＋
@@ -99,13 +100,13 @@
 			class="ml-occlusion-viewer__tool ml-occlusion-viewer__tool--wide"
 			onclick={resetOffset}
 		>
-			Fit
+			{$t('Fit')}
 		</button>
 		<button
 			bind:this={closeButton}
 			type="button"
 			class="ml-occlusion-viewer__tool"
-			aria-label="Close expanded image"
+			aria-label={$t('Close expanded image')}
 			onclick={onclose}
 		>
 			✕

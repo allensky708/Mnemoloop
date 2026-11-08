@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { type FlashcardClozeContent } from '@/schemas';
 	import { type MarkdownOptions, renderMarkdown } from '@/ui/actions/markdown';
 	import { Platform } from 'obsidian';
@@ -173,7 +174,7 @@
 		<div
 			class="ml-cloze-text"
 			role="group"
-			aria-label="Cloze content"
+			aria-label={$t('Cloze content')}
 			use:clozeInteractions
 			use:renderMarkdown={bodyOptions}
 		></div>
@@ -190,15 +191,15 @@
 					onfocus={keepHintButtonUnfocused}
 				>
 					<Icon name="lightbulb" size={18} />
-					<span class="ml-cloze-hint__label">{isHintShowing ? 'Hide hint' : 'Show hint'}</span>
+					<span class="ml-cloze-hint__label">{isHintShowing ? $t('Hide hint') : $t('Show hint')}</span>
 					{#if !isMobile}
 						<kbd class="ml-cloze-hint__key">H</kbd>
 					{/if}
 				</button>
 
 				{#if isHintShowing}
-					<div class="ml-cloze-hint" role="region" aria-label="Hint">
-						<div class="ml-cloze-hint__header">Hint</div>
+					<div class="ml-cloze-hint" role="region" aria-label={$t('Hint')}>
+						<div class="ml-cloze-hint__header">{$t('Hint')}</div>
 						<div class="ml-cloze-hint__body" use:renderMarkdown={hintOptions}></div>
 					</div>
 				{/if}

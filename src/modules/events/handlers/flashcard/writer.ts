@@ -5,6 +5,7 @@ import { AdapterKey } from '@/types/adapters';
 import { WriterKey } from '@/types/writers';
 import { ensureVaultFolder } from '@/utils/ensureVaultFolder';
 import { Logger } from '@/utils/Logger';
+import { tr } from '@/i18n';
 import { Notice } from 'obsidian';
 import { v4 as uuid } from 'uuid';
 import { EventHandler } from '../../core/EventHandler';
@@ -43,12 +44,12 @@ export class FlashcardWriterCreateHandler extends EventHandler<FlashcardWriterCr
 		await ensureVaultFolder(this._plugin.app.vault, settings.data.flashcard.watch.directory)
 			.then(() => writer.create(flashcardPath, flashcard))
 			.then(() => {
-				new Notice('Flashcard created successfully');
+				new Notice(tr('Flashcard created successfully'));
 				void this._bus.publish(new FlashcardWriterCreateResponseEvent({ filepath: flashcardPath }));
 			})
 			.catch((err) => {
 				Logger.error('Failed to create flashcard', err);
-				new Notice('Failed to create flashcard');
+				new Notice(tr('Failed to create flashcard'));
 			});
 	}
 }

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import {
 		isFlashcardBase,
 		isFlashcardCloze,
@@ -70,11 +71,11 @@
 		{/if}
 		{#snippet footer()}
 			<div class="ml-flashcard-footer">
-				<p class="ml-flashcard-footer-key">Source:</p>
+				<p class="ml-flashcard-footer-key">{$t('Source:')}</p>
 				{#if flashcard?.source}
 					<div class="ml-flashcard-footer-value" use:renderMarkdown={footerOptions}></div>
 				{:else}
-					<p class="ml-flashcard-footer-value">No source available</p>
+					<p class="ml-flashcard-footer-value">{$t('No source available')}</p>
 				{/if}
 			</div>
 		{/snippet}

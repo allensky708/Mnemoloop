@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import type { CardStatus, CardType } from '@/schemas';
 	import { Button, Combobox, Icon, Select } from '@/ui/components/elements';
 	import { filterOptions } from '@/ui/components/elements/Combobox/utils';
@@ -15,8 +16,11 @@
 	let deckInput: HTMLInputElement | null = $state(null);
 
 	const deckItems = $derived([
-		{ value: ALL_DECKS_VALUE, label: 'All decks' },
-		...deckOptions.map((deck) => ({ value: deck, label: deck })),
+		{ value: ALL_DECKS_VALUE, label: $t('All decks') },
+		...deckOptions.map((deck) => ({
+			value: deck,
+			label: deck === 'Uncategorized' ? $t('Uncategorized') : deck,
+		})),
 	]);
 	const filteredDeckItems = $derived(filterOptions(deckItems, deckSearch));
 	const selectedDeckValue = $derived(filters.deck || ALL_DECKS_VALUE);
@@ -24,7 +28,10 @@
 	function withAllOption(
 		options: { value: string; label: string }[],
 	): { value: string; label: string }[] {
-		return [{ value: '', label: 'All' }, ...options];
+		return [
+		{ value: '', label: $t('All') },
+		...options.map((option) => ({ ...option, label: $t(option.label) })),
+	];
 	}
 
 	const hasActiveFilters = $derived(
@@ -56,18 +63,18 @@
 
 <div class="ml-manage__filters {className ?? ''}">
 	<div class="ml-manage__filter-search">
-		<label for="ml-manage-filter-query">Search filename or deck</label>
+		<label for="ml-manage-filter-query">{$t('Search filename or deck')}</label>
 		<input
 			id="ml-manage-filter-query"
 			type="search"
-			placeholder="Search filename or deck"
+			placeholder={$t('Search filename or deck')}
 			value={filters.query ?? ''}
 			oninput={handleQueryInput}
 		/>
 	</div>
 	<Select
 		id="ml-manage-filter-type"
-		label="Type"
+		label={$t('Type')}
 		className="ml-manage__filter-select"
 		options={withAllOption(MANAGE_TYPE_OPTIONS)}
 		value={filters.type}
@@ -75,7 +82,7 @@
 	/>
 	<Select
 		id="ml-manage-filter-status"
-		label="Status"
+		label={$t('Status')}
 		className="ml-manage__filter-select"
 		options={withAllOption(MANAGE_STATUS_OPTIONS)}
 		value={filters.status}
@@ -92,21 +99,21 @@
 			inputValue={deckSearch}
 			class="ml-manage__deck-combobox"
 		>
-			<Combobox.Label for="ml-manage-filter-deck">Deck</Combobox.Label>
+			<Combobox.Label for="ml-manage-filter-deck">{$t('Deck')}</Combobox.Label>
 			<Combobox.Trigger
 				id="ml-manage-filter-deck"
-				ariaLabel="Deck filter"
+				ariaLabel={$t('Deck filter')}
 				class="ml-manage__deck-trigger"
 			>
-				<span class="ml-manage__deck-label">{filters.deck || 'All decks'}</span>
+				<span class="ml-manage__deck-label">{filters.deck || $t('All decks')}</span>
 				<Icon name="chevron-down" size={14} />
 			</Combobox.Trigger>
 			<Combobox.Portal>
 				<Combobox.Content class="ml-manage__deck-content">
 					<Combobox.Input
 						bind:ref={deckInput}
-						placeholder="Search decks"
-						aria-label="Search decks"
+						placeholder={$t('Search decks')}
+						aria-label={$t('Search decks')}
 						oninput={(event) => (deckSearch = event.currentTarget.value)}
 					/>
 					<Combobox.Viewport>
@@ -114,7 +121,7 @@
 							<Combobox.Item value={option.value} label={option.label} />
 						{/each}
 						{#if filteredDeckItems.length === 0}
-							<Combobox.Empty>No decks found</Combobox.Empty>
+							<Combobox.Empty>{$t('No decks found')}</Combobox.Empty>
 						{/if}
 					</Combobox.Viewport>
 				</Combobox.Content>
@@ -128,7 +135,7 @@
 		disabled={!hasActiveFilters}
 		onclick={onReset}
 	>
-		Reset filters
+		{$t('Reset filters')}
 	</Button>
 </div>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { Platform } from 'obsidian';
 	import { AUTO_SCORED_TYPES } from '@/schemas';
 	import { Button } from '@/ui/components/elements';
@@ -54,12 +55,12 @@
 				variant="primary"
 				class="ml-score-controls__button"
 				onclick={handleShowAnswer}
-				ariaLabel="Show answer"
+				ariaLabel={$t('Show answer')}
 				{disabled}
 			>
-				Show answer
+				{$t('Show answer')}
 			</Button>
-			<span class="ml-score-controls__button-key-hint">{isTouchDevice ? 'Tap' : 'Space'}</span>
+			<span class="ml-score-controls__button-key-hint">{isTouchDevice ? $t('Tap') : $t('Space')}</span>
 		</div>
 	{/if}
 </div>

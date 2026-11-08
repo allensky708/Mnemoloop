@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import type { OcclusionRecapItem } from './types';
 
 	let { items }: { items: OcclusionRecapItem[] } = $props();
@@ -8,13 +9,13 @@
 	const missedCount = $derived(total - correctCount);
 </script>
 
-<section class="ml-occlusion-recap" aria-label="Card recap">
+<section class="ml-occlusion-recap" aria-label={$t('Card recap')}>
 	<div class="ml-occlusion-recap__head">
 		<div class="ml-occlusion-recap__score">
-			{correctCount} of {total}&#32;<span class="ml-occlusion-recap__score-label">correct</span>
+			{$t('{correct} of {total} correct', { correct: correctCount, total })}
 		</div>
 		{#if missedCount > 0}
-			<span class="ml-occlusion-recap__missing">{missedCount} missed</span>
+			<span class="ml-occlusion-recap__missing">{$t('{count} missed', { count: missedCount })}</span>
 		{/if}
 	</div>
 
@@ -28,7 +29,7 @@
 	</ul>
 
 	{#if missedCount > 0}
-		<p class="ml-occlusion-recap__note">…and {correctCount} correct</p>
+		<p class="ml-occlusion-recap__note">{$t('…and {count} correct', { count: correctCount })}</p>
 	{/if}
 </section>
 

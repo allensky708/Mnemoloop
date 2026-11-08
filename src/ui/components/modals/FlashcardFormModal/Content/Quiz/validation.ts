@@ -1,5 +1,6 @@
 import { CardType } from '@/schemas';
 import type { FlashcardContent } from '@/schemas';
+import { tr } from '@/i18n';
 
 /**
  * Validate quiz form state.
@@ -17,11 +18,11 @@ export function validateQuiz(
 	options: string[],
 	correctIndex: number,
 ): string | null {
-	if (!question.trim()) return 'Question is required.';
-	if (options.filter((o) => o.trim()).length < 2) return 'At least 2 options are required.';
+	if (!question.trim()) return tr('Question is required.');
+	if (options.filter((o) => o.trim()).length < 2) return tr('At least 2 options are required.');
 	const firstEmpty = options.findIndex((o) => !o.trim());
-	if (firstEmpty !== -1) return `Option ${firstEmpty + 1} must be filled.`;
-	if (correctIndex < 0 || correctIndex >= options.length) return 'Select which option is correct.';
+	if (firstEmpty !== -1) return tr('Option {number} must be filled.', { number: firstEmpty + 1 });
+	if (correctIndex < 0 || correctIndex >= options.length) return tr('Select which option is correct.');
 	return null;
 }
 

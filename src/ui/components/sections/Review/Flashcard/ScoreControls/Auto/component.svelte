@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { Icon } from '@/ui/components';
 	import { Platform } from 'obsidian';
 	import type AutoReviewControlsProps from './types';
@@ -57,13 +58,13 @@
 				name={isAnswerCorrect ? 'circle-check-big' : 'circle-x'}
 				size={18}
 			/>
-			<p class="ml-score-controls__alert-label">{isAnswerCorrect ? 'Correct' : 'Incorrect'}</p>
+			<p class="ml-score-controls__alert-label">{isAnswerCorrect ? $t('Correct') : $t('Incorrect')}</p>
 		</div>
 		<span class="ml-score-controls__tip">
 			{#if isTouchDevice}
-				<span class="ml-score-controls__shortcut" class:mobile={isTouchDevice}>Tap</span> to continue
+				<span class="ml-score-controls__shortcut" class:mobile={isTouchDevice}>{$t('Tap')}</span> {$t('to continue')}
 			{:else}
-				Press <span class="ml-score-controls__shortcut">Space</span> to continue
+				{$t('Press')} <span class="ml-score-controls__shortcut">{$t('Space')}</span> {$t('to continue')}
 			{/if}
 		</span>
 	</div>

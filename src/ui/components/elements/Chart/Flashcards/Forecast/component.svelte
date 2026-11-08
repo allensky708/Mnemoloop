@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { ForecastChartController } from '@/ui/controllers/ForecastChartController';
 	import { scaleBand } from 'd3-scale';
 	import {
@@ -56,20 +57,20 @@
 	<div class="ml-chart-workload__timeframe-tabs" class:mobile={isMobile}>
 		<Tabs.Root onValueChange={(v) => onTabChange(v as ForecastChartTimeframe)} value={timeframe}>
 			<Tabs.List>
-				<Tabs.Trigger value="month">Month</Tabs.Trigger>
-				<Tabs.Trigger value="quarter">Quarter</Tabs.Trigger>
-				<Tabs.Trigger value="year">Year</Tabs.Trigger>
+				<Tabs.Trigger value="month">{$t('Month')}</Tabs.Trigger>
+				<Tabs.Trigger value="quarter">{$t('Quarter')}</Tabs.Trigger>
+				<Tabs.Trigger value="year">{$t('Year')}</Tabs.Trigger>
 			</Tabs.List>
 		</Tabs.Root>
 	</div>
 {/snippet}
 
-<ChartEmptyState show={data.length === 0} message="No reviews scheduled">
+<ChartEmptyState show={data.length === 0} message={$t('No reviews scheduled')}>
 	<div class="ml-chart-workload">
 		<div class="ml-chart-workload__header-section">
 			<div class="ml-chart-workload__header">
-				<h3 class="ml-chart-workload__title">Upcoming Reviews</h3>
-				<p class="ml-chart-workload__subtitle">Daily review load across the selected timeframe</p>
+				<h3 class="ml-chart-workload__title">{$t('Upcoming Reviews')}</h3>
+				<p class="ml-chart-workload__subtitle">{$t('Daily review load across the selected timeframe')}</p>
 			</div>
 			{@render timeframeTabs(false)}
 		</div>
@@ -86,7 +87,7 @@
 			height={300}
 		>
 			<Layer>
-				<Axis placement="left" label="Reviews" labelProps={{ 'font-size': '14px' }} />
+				<Axis placement="left" label={$t('Reviews')} labelProps={{ 'font-size': '14px' }} />
 				<Axis placement="bottom" tickSpacing={80} />
 				<Bars area />
 				<Highlight area />
@@ -94,7 +95,7 @@
 				{#if average > 0}
 					<AnnotationLine
 						y={average}
-						label="Average"
+						label={$t('Average')}
 						props={{
 							label: { fill: tokens['text-muted'] },
 							line: {
@@ -113,7 +114,7 @@
 						{#each tooltipData.data as d (d.entity)}
 							{#if d.value > 0}
 								<Tooltip.Item
-									label={capitalize(d.entity)}
+									label={$t(capitalize(d.entity))}
 									value={d.value}
 									format="integer"
 									valueAlign="right"
@@ -125,7 +126,7 @@
 						{/if}
 
 						<Tooltip.Item
-							label="Total"
+							label={$t('Total')}
 							value={tooltipData.values.reduce((a: number, b: number) => a + b, 0)}
 							format="integer"
 						/>

@@ -6,6 +6,7 @@
 	import TableRow from './Row/component.svelte';
 	import { MANAGE_STATUS_OPTIONS } from '../options';
 	import type ManageTableProps from './types';
+	import { cardTypeKey, t } from '@/i18n';
 
 	let {
 		cards,
@@ -21,21 +22,21 @@
 
 	function labelFor(card: FlashcardMetadata): string {
 		const preview = previews[card.file];
-		return preview && !preview.includes('Loading') ? preview : 'this card';
+		return preview && !preview.includes('Loading') ? preview : $t('this card');
 	}
 </script>
 
 <div class="ml-manage-table {className ?? ''}">
 	<div class="ml-manage-table__wrap">
-		<Table.Root caption="Manage flashcards" className="ml-manage-table__grid">
+		<Table.Root caption={$t('Manage flashcards')} className="ml-manage-table__grid">
 			<Table.Head>
 				<Table.Row>
-					<Table.Th scope="col">Type</Table.Th>
-					<Table.Th scope="col">Content Preview</Table.Th>
-					<Table.Th scope="col">Decks</Table.Th>
-					<Table.Th scope="col">Status</Table.Th>
-					<Table.Th scope="col">Due Date</Table.Th>
-					<Table.Th scope="col">Actions</Table.Th>
+					<Table.Th scope="col">{$t('Type')}</Table.Th>
+					<Table.Th scope="col">{$t('Content Preview')}</Table.Th>
+					<Table.Th scope="col">{$t('Decks')}</Table.Th>
+					<Table.Th scope="col">{$t('Status')}</Table.Th>
+					<Table.Th scope="col">{$t('Due Date')}</Table.Th>
+					<Table.Th scope="col">{$t('Actions')}</Table.Th>
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
@@ -58,16 +59,16 @@
 	<!-- Mobile stacked-card presentation -->
 	<div class="ml-manage-table__mobile">
 		{#each cards as card (card.uuid)}
-			<article class="ml-manage-card" aria-label={`Flashcard: ${labelFor(card)}`}>
+			<article class="ml-manage-card" aria-label={$t('Flashcard: {label}', { label: labelFor(card) })}>
 				<header class="ml-manage-card__header">
 					<span class="ml-manage-card__badge ml-manage-card__badge--{card.card_type}">
-						{card.card_type}
+						{$t(cardTypeKey(card.card_type))}
 					</span>
 					<div class="ml-manage-card__actions">
 						<Button
 							variant="icon"
 							size="small"
-							ariaLabel={`Edit ${labelFor(card)}`}
+							ariaLabel={$t('Edit {label}', { label: labelFor(card) })}
 							onclick={() => onEdit(card)}
 						>
 							{#snippet icon()}
@@ -77,7 +78,7 @@
 						<Button
 							variant="icon"
 							size="small"
-							ariaLabel={`Delete ${labelFor(card)}`}
+							ariaLabel={$t('Delete {label}', { label: labelFor(card) })}
 							onclick={() => onDelete(card)}
 						>
 							{#snippet icon()}
@@ -88,11 +89,11 @@
 				</header>
 				<dl class="ml-manage-card__fields">
 					<div class="ml-manage-card__field">
-						<dt class="ml-manage-card__label">Preview</dt>
-						<dd class="ml-manage-card__value">{previews[card.file] ?? 'Loading…'}</dd>
+						<dt class="ml-manage-card__label">{$t('Preview')}</dt>
+						<dd class="ml-manage-card__value">{previews[card.file] ?? $t('Loading…')}</dd>
 					</div>
 					<div class="ml-manage-card__field">
-						<dt class="ml-manage-card__label">Decks</dt>
+						<dt class="ml-manage-card__label">{$t('Decks')}</dt>
 						<dd class="ml-manage-card__value">
 							<ManageDeckCell
 								{card}
@@ -103,19 +104,19 @@
 						</dd>
 					</div>
 					<div class="ml-manage-card__field">
-						<dt class="ml-manage-card__label">Status</dt>
+						<dt class="ml-manage-card__label">{$t('Status')}</dt>
 						<dd class="ml-manage-card__value">
 							<Select
 								id={`ml-manage-status-m-${card.uuid}`}
-								options={MANAGE_STATUS_OPTIONS}
+								options={MANAGE_STATUS_OPTIONS.map((option) => ({ ...option, label: $t(option.label) }))}
 								value={card.status}
-								ariaLabel={`Status for ${labelFor(card)}`}
+								ariaLabel={$t('Status for {label}', { label: labelFor(card) })}
 								onchange={(value) => onStatusChange(card, value)}
 							/>
 						</dd>
 					</div>
 					<div class="ml-manage-card__field">
-						<dt class="ml-manage-card__label">Due Date</dt>
+						<dt class="ml-manage-card__label">{$t('Due Date')}</dt>
 						<dd class="ml-manage-card__value">{formatDate(new Date(card.due))}</dd>
 					</div>
 				</dl>

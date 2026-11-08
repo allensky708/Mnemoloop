@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import {
 		ChartEmptyState,
 		ChartReviewHeatmap,
@@ -20,13 +21,13 @@
 <section class="ml-dashboard__chart-section {className}" aria-labelledby="progress-chart-title">
 	<Tabs.Root value={activeChart} onValueChange={(v) => onTabChange(v as ChartType)}>
 		<Tabs.List>
-			<Tabs.Trigger value="heatmap">Heatmap</Tabs.Trigger>
-			<Tabs.Trigger value="forecast">Forecast</Tabs.Trigger>
+			<Tabs.Trigger value="heatmap">{$t('Heatmap')}</Tabs.Trigger>
+			<Tabs.Trigger value="forecast">{$t('Forecast')}</Tabs.Trigger>
 		</Tabs.List>
 		<Tabs.Content value="heatmap">
 			<ChartEmptyState
 				show={stats.flashcard.total_learned === 0}
-				message="No review history yet. Start reviewing to see your heatmap."
+				message={$t('No review history yet. Start reviewing to see your heatmap.')}
 			>
 				<ChartReviewHeatmap {stats} year={new Date().getFullYear()} />
 			</ChartEmptyState>

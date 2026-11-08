@@ -1,4 +1,5 @@
 import { getPath } from '@/utils/dot-path';
+import { tr, setLanguage } from '@/i18n';
 import { RETENTION_PERIOD_OPTIONS } from '@/schemas/settings';
 import { settingsStore } from '@/ui/store/settings.store';
 import { Notice, Plugin, PluginSettingTab, Setting, type SettingDefinitionItem } from 'obsidian';
@@ -16,7 +17,7 @@ import {
 
 function retentionOptions(): Record<string, string> {
 	return Object.fromEntries(
-		RETENTION_PERIOD_OPTIONS.map((option) => [String(option.value), option.label]),
+		RETENTION_PERIOD_OPTIONS.map((option) => [String(option.value), tr(option.label)]),
 	);
 }
 
@@ -28,47 +29,66 @@ export class SettingsView extends PluginSettingTab {
 	getSettingDefinitions(): SettingDefinitionItem[] {
 		return [
 			{
-				name: 'Flashcard directory',
-				desc: 'Vault folder Mnemoloop watches for flashcards.',
+				type: 'group',
+				heading: tr('Language'),
+				items: [
+					{
+						name: tr('Interface language'),
+						desc: tr('Follow Obsidian or choose a language for Mnemoloop.'),
+						control: {
+							type: 'dropdown',
+							key: 'language',
+							options: {
+								auto: tr('Follow Obsidian'),
+								en: 'English',
+								zh: '简体中文',
+							},
+						},
+					},
+				],
+			},
+			{
+				name: tr('Flashcard directory'),
+				desc: tr('Vault folder Mnemoloop watches for flashcards.'),
 				control: {
 					type: 'folder',
 					key: 'flashcard.watch.directory',
 					includeRoot: false,
-					placeholder: 'flashcards',
+					placeholder: tr('flashcards'),
 				},
 			},
 			{
-				name: 'Flashcard marker',
-				desc: 'Marker that splits a card into front and back.',
+				name: tr('Flashcard marker'),
+				desc: tr('Marker that splits a card into front and back.'),
 				control: {
 					type: 'text',
 					key: 'flashcard.marker',
-					validate: (value) => (value.trim() === '' ? 'Enter a marker.' : undefined),
+					validate: (value) => (value.trim() === '' ? tr('Enter a marker.') : undefined),
 				},
 			},
 			{
 				type: 'group',
-				heading: 'Source notes',
+				heading: tr('Source notes'),
 				items: [
 					{
-						name: 'Source note directory',
-						desc: 'Folder whose notes are offered as review context; empty disables directory matching.',
+						name: tr('Source note directory'),
+						desc: tr('Folder whose notes are offered as review context; empty disables directory matching.'),
 						control: {
 							type: 'folder',
 							key: 'source_note.watch.directory',
 							includeRoot: false,
-							placeholder: 'notes',
+							placeholder: tr('notes'),
 						},
 					},
 					{
-						name: 'Source note tags',
-						desc: 'Comma-separated #tags that mark source notes; empty disables tag matching.',
+						name: tr('Source note tags'),
+						desc: tr('Comma-separated #tags that mark source notes; empty disables tag matching.'),
 						render: (setting) =>
 							this.renderCommaList(setting, 'source_note.watch.tags', parseTags, formatTags),
 					},
 					{
-						name: 'Difficulty threshold',
-						desc: 'Include a source note when a due card is harder than this value.',
+						name: tr('Difficulty threshold'),
+						desc: tr('Include a source note when a due card is harder than this value.'),
 						control: {
 							type: 'number',
 							key: 'source_note.priming.difficulty_threshold',
@@ -78,18 +98,18 @@ export class SettingsView extends PluginSettingTab {
 							validate: (value) =>
 								Number.isFinite(value) && value >= 0
 									? undefined
-									: 'Enter a non-negative number.',
+									: tr('Enter a non-negative number.'),
 						},
 					},
 				],
 			},
 			{
 				type: 'group',
-				heading: 'FSRS parameters',
+				heading: tr('FSRS parameters'),
 				items: [
 					{
-						name: 'Retention rate',
-						desc: 'Target probability of recall.',
+						name: tr('Retention rate'),
+						desc: tr('Target probability of recall.'),
 						control: {
 							type: 'slider',
 							key: 'flashcard.fsrs.request_retention',
@@ -100,8 +120,8 @@ export class SettingsView extends PluginSettingTab {
 						},
 					},
 					{
-						name: 'Maximum interval',
-						desc: 'Maximum number of days between reviews.',
+						name: tr('Maximum interval'),
+						desc: tr('Maximum number of days between reviews.'),
 						control: {
 							type: 'number',
 							key: 'flashcard.fsrs.maximum_interval',
@@ -110,18 +130,18 @@ export class SettingsView extends PluginSettingTab {
 						},
 					},
 					{
-						name: 'Enable fuzz',
-						desc: 'Add small random variations to intervals.',
+						name: tr('Enable fuzz'),
+						desc: tr('Add small random variations to intervals.'),
 						control: { type: 'toggle', key: 'flashcard.fsrs.enable_fuzz' },
 					},
 					{
-						name: 'Enable short term',
-						desc: 'Allow learning and relearning steps in minutes and hours.',
+						name: tr('Enable short term'),
+						desc: tr('Allow learning and relearning steps in minutes and hours.'),
 						control: { type: 'toggle', key: 'flashcard.fsrs.enable_short_term' },
 					},
 					{
-						name: 'Learning steps',
-						desc: 'Comma-separated steps, for example 1m, 10m.',
+						name: tr('Learning steps'),
+						desc: tr('Comma-separated steps, for example 1m, 10m.'),
 						render: (setting) =>
 							this.renderCommaList(
 								setting,
@@ -131,8 +151,8 @@ export class SettingsView extends PluginSettingTab {
 							),
 					},
 					{
-						name: 'Relearning steps',
-						desc: 'Comma-separated steps, for example 10m.',
+						name: tr('Relearning steps'),
+						desc: tr('Comma-separated steps, for example 10m.'),
 						render: (setting) =>
 							this.renderCommaList(
 								setting,
@@ -142,24 +162,24 @@ export class SettingsView extends PluginSettingTab {
 							),
 					},
 					{
-						name: 'Interval preview',
-						desc: 'Intervals the current parameters would schedule.',
+						name: tr('Interval preview'),
+						desc: tr('Intervals the current parameters would schedule.'),
 						render: (setting) => this.renderIntervalPreview(setting),
 					},
 				],
 			},
 			{
 				type: 'group',
-				heading: 'Data management',
+				heading: tr('Data management'),
 				items: [
 					{
-						name: 'Enable soft delete',
-						desc: 'Keep deleted items recoverable for a period.',
+						name: tr('Enable soft delete'),
+						desc: tr('Keep deleted items recoverable for a period.'),
 						control: { type: 'toggle', key: 'enable_soft_delete' },
 					},
 					{
-						name: 'Retention period',
-						desc: 'How long deleted items are kept before permanent removal.',
+						name: tr('Retention period'),
+						desc: tr('How long deleted items are kept before permanent removal.'),
 						control: {
 							type: 'dropdown',
 							key: 'soft_delete_hours',
@@ -179,9 +199,14 @@ export class SettingsView extends PluginSettingTab {
 	async setControlValue(key: string, value: unknown): Promise<void> {
 		try {
 			await settingsStore.commitPath(key, coerceControlValue(key, value));
+			if (key === 'language') {
+				setLanguage(value);
+				new Notice(tr('Language changed'));
+				this.display();
+			}
 		} catch (error) {
 			const message = error instanceof Error ? error.message : String(error);
-			new Notice(`Failed to save settings: ${message}`);
+			new Notice(tr('Failed to save settings: {message}', { message }));
 		}
 	}
 
@@ -217,7 +242,7 @@ export class SettingsView extends PluginSettingTab {
 				await settingsStore.commitPath(key, result.value);
 			} catch (error) {
 				const message = error instanceof Error ? error.message : String(error);
-				new Notice(`Failed to save settings: ${message}`);
+				new Notice(tr('Failed to save settings: {message}', { message }));
 			}
 		};
 

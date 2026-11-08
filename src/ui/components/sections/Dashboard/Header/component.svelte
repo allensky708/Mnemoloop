@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import type DashboardHeaderProps from './types';
 
 	export const { className, onRefresh, isLoading } = $props() as DashboardHeaderProps;
@@ -6,8 +7,8 @@
 
 <header class="ml-dashboard__header {className}">
 	<div class="ml-dashboard__title-group">
-		<h1 class="ml-dashboard__title">Learning dashboard</h1>
-		<p class="ml-dashboard__subtitle">Track your progress and stay consistent</p>
+		<h1 class="ml-dashboard__title">{$t('Learning dashboard')}</h1>
+		<p class="ml-dashboard__subtitle">{$t('Track your progress and stay consistent')}</p>
 	</div>
 </header>
 

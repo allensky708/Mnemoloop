@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import { Button, Chip, Icon } from '@/ui/components/elements';
 	import type Props from './types';
 
@@ -10,17 +11,17 @@
 		{#snippet icon()}
 			<Icon name="arrow-left" size={16} />
 		{/snippet}
-		Dashboard
+		{$t('Dashboard')}
 	</Button>
 	<div class="ml-priming__header-content">
 		<div class="ml-priming__header-title">
-			<h1 class="ml-priming__title">Prime difficult notes</h1>
-			<p class="ml-priming__subtitle">Review the source material before your study session</p>
+			<h1 class="ml-priming__title">{$t('Prime difficult notes')}</h1>
+			<p class="ml-priming__subtitle">{$t('Review the source material before your study session')}</p>
 		</div>
 
 		<div class="ml-priming__chips">
-			<Chip class="ml-priming__chip">{state.selection.deckLabel}</Chip>
-			<Chip class="ml-priming__chip">Difficulty &gt; {state.threshold.toFixed(1)}</Chip>
+			<Chip class="ml-priming__chip">{$t(state.selection.deckLabel)}</Chip>
+			<Chip class="ml-priming__chip">{$t('Difficulty > {value}', { value: state.threshold.toFixed(1) })}</Chip>
 		</div>
 	</div>
 </header>

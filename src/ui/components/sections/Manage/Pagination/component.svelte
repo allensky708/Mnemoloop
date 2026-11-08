@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import { Button } from '@/ui/components/elements';
 	import type ManagePaginationProps from './types';
 
@@ -68,63 +69,63 @@
 	}
 </script>
 
-<nav class="ml-manage__pagination {className ?? ''}" aria-label="Pagination">
+<nav class="ml-manage__pagination {className ?? ''}" aria-label={$t('Pagination')}>
 	<div class="ml-manage__pagination-summary" aria-live="polite">
-		Showing {rangeStart}–{rangeEnd} of {safeTotalItems}
+		{$t('Showing {start}–{end} of {total}', { start: rangeStart, end: rangeEnd, total: safeTotalItems })}
 	</div>
 	<div class="ml-manage__pagination-controls">
 		<Button
 			variant="secondary"
 			size="small"
 			disabled={safeCurrentPage <= 1}
-			ariaLabel="First page"
+			ariaLabel={$t('First page')}
 			onclick={() => goToPage(1)}
 		>
-			First
+			{$t('First')}
 		</Button>
 		<Button
 			variant="secondary"
 			size="small"
 			disabled={safeCurrentPage <= 1}
-			ariaLabel="Previous page"
+			ariaLabel={$t('Previous page')}
 			onclick={goPrevious}
 		>
-			Previous
+			{$t('Previous')}
 		</Button>
-		<span class="ml-manage__page-info">Page {safeCurrentPage} of {safeTotalPages}</span>
+		<span class="ml-manage__page-info">{$t('Page {page} of {total}', { page: safeCurrentPage, total: safeTotalPages })}</span>
 		<Button
 			variant="secondary"
 			size="small"
 			disabled={safeCurrentPage >= safeTotalPages}
-			ariaLabel="Next page"
+			ariaLabel={$t('Next page')}
 			onclick={goNext}
 		>
-			Next
+			{$t('Next')}
 		</Button>
 		<Button
 			variant="secondary"
 			size="small"
 			disabled={safeCurrentPage >= safeTotalPages}
-			ariaLabel="Last page"
+			ariaLabel={$t('Last page')}
 			onclick={() => goToPage(safeTotalPages)}
 		>
-			Last
+			{$t('Last')}
 		</Button>
 	</div>
 	<form class="ml-manage__page-jump" onsubmit={handleSubmit}>
-		<label for="ml-manage-page-number">Page</label>
+		<label for="ml-manage-page-number">{$t('Page')}</label>
 		<input
 			id="ml-manage-page-number"
 			type="number"
 			min="1"
 			max={safeTotalPages}
 			inputmode="numeric"
-			aria-label="Page number"
+			aria-label={$t('Page number')}
 			value={pageInput}
 			oninput={handlePageInput}
 			onkeydown={handlePageKeydown}
 		/>
-		<Button type="submit" variant="secondary" size="small">Go</Button>
+		<Button type="submit" variant="secondary" size="small">{$t('Go')}</Button>
 	</form>
 </nav>
 

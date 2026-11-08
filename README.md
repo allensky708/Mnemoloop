@@ -1,5 +1,9 @@
 # Mnemoloop
 
+**English** | [简体中文](./README.zh-CN.md)
+
+> 简体中文版由 [allensky708](https://github.com/allensky708) 维护，界面语言可在 **Settings → Mnemoloop → Language** 中切换。
+
 > The active knowledge layer for Obsidian.  
 > FSRS-powered spaced repetition that keeps your notes pristine.
 

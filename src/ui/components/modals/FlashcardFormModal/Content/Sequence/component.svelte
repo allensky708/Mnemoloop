@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { FormField, Textarea, Button, Icon } from '@/ui/components/elements';
 	import type { FlashcardSequenceContent } from '@/schemas';
 	import type ContentTypeProps from '../types';
@@ -39,7 +40,7 @@
 </script>
 
 <Textarea
-	label="Question"
+	label={$t('Question')}
 	value={question}
 	required
 	rows={5}
@@ -47,12 +48,12 @@
 	{disabled}
 	onchange={(v) => (question = v)}
 />
-<FormField label="Steps">
+<FormField label={$t('Steps')}>
 	{#each steps as step, i (i)}
 		<div class="ml-field-list-item">
 			<Textarea
 				className="ml-field-list-item__input"
-				label={`Steps ${i + 1}`}
+				label={$t('Step {number}', { number: i + 1 })}
 				value={step}
 				required
 				rows={3}
@@ -66,13 +67,13 @@
 				size="small"
 				disabled={steps.length <= 2 || disabled}
 				onclick={() => removeStep(i)}
-				ariaLabel="Remove"
+				ariaLabel={$t('Remove')}
 			>
 				<Icon name="trash-2" size={14} />
 			</Button>
 		</div>
 	{/each}
-	<Button variant="secondary" size="small" {disabled} onclick={addStep}>Add step</Button>
+	<Button variant="secondary" size="small" {disabled} onclick={addStep}>{$t('Add step')}</Button>
 </FormField>
 
 <style lang="scss">

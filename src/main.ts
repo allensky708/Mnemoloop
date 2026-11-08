@@ -1,4 +1,5 @@
 import './ui/styles/main.scss';
+import { initI18n } from './i18n';
 
 import { bannerStore } from '@/ui/store/banner.store';
 import { Plugin } from 'obsidian';
@@ -61,6 +62,8 @@ export default class MnemoloopPlugin extends Plugin {
 	private ribbonIcon?: HTMLElement;
 
 	async onload() {
+		const rawData = (await this.loadData()) as { settings?: { language?: unknown } } | null;
+		initI18n(rawData?.settings?.language);
 		await new Migrator(new PluginDocumentStore(this), MIGRATIONS).run();
 
 		this.initializeRibbonIcon();

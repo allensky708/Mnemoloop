@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { createSortable } from '@dnd-kit/svelte/sortable';
 	import { type MarkdownOptions, renderMarkdown } from '@/ui/actions/markdown';
 
@@ -37,7 +38,7 @@
 	<span
 		{@attach sortable.attachHandle}
 		class="ml-sequence-step-handle"
-		aria-label="Drag to reorder"
+		aria-label={$t('Drag to reorder')}
 	>
 		⠿
 	</span>

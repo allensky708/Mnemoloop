@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { EventBus } from '@/modules/events/core';
 	import {
 		FlashcardWriterCreateRequestEvent,
@@ -137,7 +138,7 @@
 				);
 			}
 		} catch (e) {
-			controller.store.setError(e instanceof Error ? e.message : 'An error occurred');
+			controller.store.setError(e instanceof Error ? e.message : $t('An error occurred'));
 			controller.store.setLoading(false);
 			return false;
 		}
@@ -154,7 +155,7 @@
 
 <div class="ml-form-modal">
 	<h2 class="ml-form-modal-title">
-		{mode === 'edit' ? 'Edit flashcard' : 'Create flashcard'}
+		{mode === 'edit' ? $t('Edit flashcard') : $t('Create flashcard')}
 	</h2>
 
 	{#if error}
@@ -165,12 +166,12 @@
 	{/if}
 
 	<!-- Card Type -->
-	<FormField label="Card type">
+	<FormField label={$t('Card type')}>
 		<Tabs.Root value={selectedType} onValueChange={handleTypeChange}>
 			<Tabs.List className="ml-card-type-tabs-list">
 				{#each cardTypeOptions as tab (tab.value)}
 					<Tabs.Trigger value={tab.value} disabled={mode === 'edit' || isLoading}>
-						{tab.label}
+						{$t(tab.label)}
 					</Tabs.Trigger>
 				{/each}
 			</Tabs.List>
@@ -218,18 +219,18 @@
 
 	<!-- Shared metadata -->
 	<Input
-		label="Deck"
+		label={$t('Deck')}
 		value={deckFormatted}
-		placeholder="Example::Nested, New deck"
-		helperText="Comma-separated list of decks"
+		placeholder={$t('Example::Nested, New deck')}
+		helperText={$t('Comma-separated list of decks')}
 		disabled={isLoading}
 		onchange={handleDeckChange}
 	/>
 	<Input
-		label="Source"
+		label={$t('Source')}
 		value={source}
-		placeholder="[[path/to/file]]"
-		helperText="Wrap the path in double brackets, e.g. [[path/to/file]]"
+		placeholder={$t('[[path/to/file]]')}
+		helperText={$t('Wrap the path in double brackets, e.g. [[path/to/file]]')}
 		disabled={isLoading}
 		onchange={(v) => (source = v)}
 	/>

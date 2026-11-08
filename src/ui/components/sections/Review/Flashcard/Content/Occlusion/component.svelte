@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { type FlashcardOcclusionContent, type FlashcardOcclusionMask } from '@/schemas';
 	import { type MarkdownOptions, renderMarkdown } from '@/ui/actions/markdown';
 	import { Button, Icon } from '@/ui/components';
@@ -286,10 +287,10 @@
 			<div class="ml-occlusion-header">
 				<div class="ml-occlusion-header__main" role="status" aria-live="polite">
 					<div class="ml-occlusion-header__eyebrow">
-						Prompt <b>{promptIndex + 1}</b> of {shuffledMasks.length}
+						{$t('Prompt {current} of {total}', { current: promptIndex + 1, total: shuffledMasks.length })}
 					</div>
 					<div class="ml-occlusion-header__question">
-						Select the <b>{currentPrompt?.answer}</b>
+						{$t('Select the')} <b>{currentPrompt?.answer}</b>
 					</div>
 				</div>
 				<div class="ml-occlusion-header__side">
@@ -310,7 +311,7 @@
 						>
 							<Icon name="lightbulb" size={16} />
 							<span class="ml-occlusion-hint__label">
-								{isHintShowing ? 'Hide hint' : 'Show hint'}
+								{isHintShowing ? $t('Hide hint') : $t('Show hint')}
 							</span>
 							<kbd class="ml-occlusion-hint__key">H</kbd>
 						</button>
@@ -319,8 +320,8 @@
 			</div>
 
 			{#if isHintShowing && currentPrompt?.hint}
-				<div class="ml-occlusion-hint" role="region" aria-label="Hint">
-					<div class="ml-occlusion-hint__header">Hint</div>
+				<div class="ml-occlusion-hint" role="region" aria-label={$t('Hint')}>
+					<div class="ml-occlusion-hint__header">{$t('Hint')}</div>
 					<div class="ml-occlusion-hint__body" use:renderMarkdown={hintOptions}></div>
 				</div>
 			{/if}
@@ -333,7 +334,7 @@
 				<button
 					type="button"
 					class="ml-occlusion-expand"
-					aria-label="Expand image"
+					aria-label={$t('Expand image')}
 					onclick={() => (isViewerOpen = true)}
 				>
 					<Icon name="expand" size={16} />
@@ -351,7 +352,7 @@
 						<img class="ml-occlusion-stage__img" src={imageUrl} alt={content.image} />
 					{:else}
 						<div class="ml-occlusion-missing" role="alert">
-							<p class="ml-occlusion-missing__title">Image not found</p>
+							<p class="ml-occlusion-missing__title">{$t('Image not found')}</p>
 							<p class="ml-occlusion-missing__reference">{content.image}</p>
 						</div>
 					{/if}
@@ -364,9 +365,9 @@
 		{#if !isComplete}
 			<div class="ml-occlusion-actions">
 				<Button variant="link" class="ml-occlusion-reveal" onclick={revealAll}>
-					Reveal remaining regions
+					{$t('Reveal remaining regions')}
 				</Button>
-				<span class="ml-occlusion-found">{foundCount} of {shuffledMasks.length} revealed</span>
+				<span class="ml-occlusion-found">{$t('{found} of {total} revealed', { found: foundCount, total: shuffledMasks.length })}</span>
 			</div>
 		{/if}
 	</div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { type FlashcardQuizContent } from '@/schemas';
 	import { type MarkdownOptions, renderMarkdown } from '@/ui/actions/markdown';
 	import type { FlashcardContentProps } from '../types';
@@ -92,7 +93,7 @@
 <div bind:this={containerRef} class="ml-quiz-content">
 	<div class="ml-quiz-question" use:renderMarkdown={questionOptions}></div>
 
-	<div class="ml-quiz-options" role="radiogroup" aria-label="Answer options">
+	<div class="ml-quiz-options" role="radiogroup" aria-label={$t('Answer options')}>
 		{#each shuffledOptions as option, i (option.id)}
 			{@const isSelected = selectedShuffledIndex === i}
 			{@const isCorrectOption = option.original_index === correctOriginalIndex}

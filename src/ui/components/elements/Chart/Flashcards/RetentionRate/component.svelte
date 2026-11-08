@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { ChartEmptyState } from '@/ui/components';
 	import {
 		AnnotationLine,
@@ -21,10 +22,10 @@
 
 <div class="ml-chart-retention-rate {className ?? ''}">
 	<div class="ml-chart-retention-rate__header">
-		<div class="ml-chart-retention-rate__title">Retention Rate</div>
-		<div class="ml-chart-retention-rate__subtitle">Percentage of correct answers over time</div>
+		<div class="ml-chart-retention-rate__title">{$t('Retention Rate')}</div>
+		<div class="ml-chart-retention-rate__subtitle">{$t('Percentage of correct answers over time')}</div>
 	</div>
-	<ChartEmptyState show={data.length === 0} message="No review history yet.">
+	<ChartEmptyState show={data.length === 0} message={$t('No review history yet.')}>
 		<Chart
 			{data}
 			x="date"
@@ -37,12 +38,12 @@
 			<Layer>
 				<Axis
 					placement="left"
-					label="Retention"
+					label={$t('Retention')}
 					labelProps={{ 'font-size': '12px' }}
 					format={(v: number) => `${Math.round(v * 100)}%`}
 					rule
 				/>
-				<Axis placement="bottom" label="Date" labelProps={{ 'font-size': '12px' }} rule />
+				<Axis placement="bottom" label={$t('Date')} labelProps={{ 'font-size': '12px' }} rule />
 
 				<Highlight lines points opacity={0.7} />
 				<Spline y="trendRetention" stroke={tokens['interactive-accent']} strokeWidth={2} />
@@ -56,7 +57,7 @@
 
 				<AnnotationLine
 					y={requestRetention}
-					label={`target value: ${requestRetention * 100}% `}
+					label={$t('target value: {value}%', { value: requestRetention * 100 })}
 					labelPlacement="top-left"
 					labelXOffset={20}
 					props={{
@@ -70,12 +71,12 @@
 					<Tooltip.Header value={tooltipData.date.toLocaleDateString()} />
 					<Tooltip.List>
 						<Tooltip.Item
-							label="Spot retention"
+							label={$t('Spot retention')}
 							value={tooltipData.retention}
 							format={(v: number) => `${Math.round(v * 100)}%`}
 						/>
 						<Tooltip.Item
-							label="Linear trend"
+							label={$t('Linear trend')}
 							value={tooltipData.trendRetention}
 							format={(v: number) => `${Math.round(v * 100)}%`}
 						/>

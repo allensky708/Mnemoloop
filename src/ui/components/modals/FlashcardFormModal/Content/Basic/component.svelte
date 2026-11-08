@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import type { FlashcardBaseContent, FlashcardContent } from '@/schemas';
 	import { CardType } from '@/schemas';
 	import { Textarea } from '@/ui/components/elements';
@@ -23,8 +24,8 @@
 	// --- Register validate + buildContent with parent ---
 	$effect(() => {
 		const validate: ValidateFn = () => {
-			if (!front.trim()) return 'Front is required.';
-			if (!back.trim()) return 'Back is required.';
+			if (!front.trim()) return $t('Front is required.');
+			if (!back.trim()) return $t('Back is required.');
 			return null;
 		};
 		const buildContent: BuildContentFn = () =>
@@ -33,5 +34,5 @@
 	});
 </script>
 
-<Textarea label="Front" value={front} required rows={5} maxLength={1000} {disabled} onchange={(v) => (front = v)} />
-<Textarea label="Back" value={back} required rows={5} maxLength={4000} {disabled} onchange={(v) => (back = v)} />
+<Textarea label={$t('Front')} value={front} required rows={5} maxLength={1000} {disabled} onchange={(v) => (front = v)} />
+<Textarea label={$t('Back')} value={back} required rows={5} maxLength={4000} {disabled} onchange={(v) => (back = v)} />

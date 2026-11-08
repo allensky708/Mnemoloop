@@ -1,4 +1,5 @@
 import { Logger } from '@/utils/Logger';
+import { tr } from '@/i18n';
 import { ItemView } from 'obsidian';
 import type { App, HoverParent, HoverPopover, WorkspaceLeaf } from 'obsidian';
 import { mount, unmount } from 'svelte';
@@ -57,7 +58,7 @@ export class AppView extends ItemView implements HoverParent {
 			});
 		} catch (error) {
 			Logger.error('Failed to open Home view:', error);
-			this.containerEl.createDiv({ text: 'Failed to load mnemoloop' });
+			this.containerEl.createDiv({ text: tr('Failed to load mnemoloop') });
 		}
 	}
 

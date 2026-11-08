@@ -9,6 +9,7 @@ import {
 	FlashcardWriterUpdateResponseEvent,
 } from '../../domains/flashcard';
 import { VaultModifyEvent } from '../../domains/vault';
+import { tr } from '@/i18n';
 
 export class FlashcardStaleOnSourceNoteModifyHandler extends EventHandler<VaultModifyEvent> {
 	constructor(deps: IEventRegistryDependencies) {
@@ -55,7 +56,7 @@ export class FlashcardStaleOnSourceNoteModifyHandler extends EventHandler<VaultM
 		}
 
 		const cardLabel = staleCount === 1 ? 'flashcard' : 'flashcards';
-		new Notice(`${staleCount} ${cardLabel} became stale`);
+		new Notice(tr('{count} {label} became stale', { count: staleCount, label: tr(cardLabel) }));
 	}
 
 	private async _writeStaleStatus(uuid: string): Promise<boolean> {

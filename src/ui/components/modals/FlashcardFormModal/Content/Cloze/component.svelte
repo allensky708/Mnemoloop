@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { Textarea } from '@/ui/components/elements';
 	import type { FlashcardClozeContent } from '@/schemas';
 	import type ContentTypeProps from '../types';
@@ -8,8 +9,9 @@
 	let { mode, initialContent, onRegister, disabled = false }: ContentTypeProps = $props();
 
 	// --- Form state ---
-	const clozePlaceholder =
-		'Enter text with {{c1::answer}} markers, e.g. "The capital of {{c1::France}} is {{c2::Paris}}"';
+	const clozePlaceholder = $derived(
+		$t('Enter text with {{c1::answer}} markers, e.g. "The capital of {{c1::France}} is {{c2::Paris}}"'),
+	);
 	let clozeText = $state('');
 
 	// --- Cloze helper ---
@@ -48,7 +50,7 @@
 </script>
 
 <Textarea
-	label="Text"
+	label={$t('Text')}
 	placeholder={clozePlaceholder}
 	value={clozeText}
 	required

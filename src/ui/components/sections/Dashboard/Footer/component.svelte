@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import { Button, Card, Icon } from '@/ui/components';
 	import type DashboardFooterProps from './types';
 	import { SvelteMap } from 'svelte/reactivity';
@@ -64,8 +65,8 @@
 
 <Card class="ml-dashboard__study-actions">
 	<header class="ml-dashboard__study-actions__header">
-		<h2 id="ml-dashboard-study-actions-title">Study next</h2>
-		<span class="ml-dashboard__study-actions__deck">{selectedDeck?.name ?? 'All decks'}</span>
+		<h2 id="ml-dashboard-study-actions-title">{$t('Study next')}</h2>
+		<span class="ml-dashboard__study-actions__deck">{selectedDeck?.name ?? $t('All decks')}</span>
 	</header>
 	<div class="ml-dashboard__study-actions__controls">
 		<Button
@@ -77,16 +78,16 @@
 		>
 			{#if isLoading}
 				<Icon name="loader-2" class="ml-spin" size={20} />
-				<span>Loading...</span>
+				<span>{$t('Loading...')}</span>
 			{:else if reviewDueCount > 0}
 				<Icon name="play" size={20} />
-				<span>Review {reviewDueCount} due {reviewDueCount === 1 ? 'card' : 'cards'}</span>
+				<span>{$tn(reviewDueCount, 'Review {count} due card', 'Review {count} due cards', { count: reviewDueCount })}</span>
 			{:else if hasNextReview}
 				<Icon name="clock" size={20} />
-				<span>Next review in {countdownDisplay}</span>
+				<span>{$t('Next review in {time}', { time: countdownDisplay })}</span>
 			{:else}
 				<Icon name="check-circle" size={20} />
-				<span>All caught up!</span>
+				<span>{$t('All caught up!')}</span>
 			{/if}
 		</Button>
 		<Button
@@ -96,11 +97,11 @@
 			disabled={isPrimingDisabled}
 			onclick={onStartPriming}
 		>
-			<span class="ml-prime-button__label">Prime difficult notes</span>
+			<span class="ml-prime-button__label">{$t('Prime difficult notes')}</span>
 			<span class="ml-prime-button__support">
 				{primingAvailability === 'empty'
-					? 'No difficult notes due'
-					: `Difficulty > ${difficultyThreshold.toFixed(1)}`}
+					? $t('No difficult notes due')
+					: $t('Difficulty > {value}', { value: difficultyThreshold.toFixed(1) })}
 			</span>
 		</Button>
 	</div>

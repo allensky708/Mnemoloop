@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import { Icon, NavigationMenu } from '@/ui/components/elements';
 	import type NavbarProps from './types';
 
@@ -24,7 +25,7 @@
 			{#each tabs as tab (tab.value)}
 				<NavigationMenu.Item value={tab.value} openOnHover={false}>
 					<NavigationMenu.Trigger>
-						<Icon name={tab.icon} />{tab.label}
+						<Icon name={tab.icon} />{$t(tab.label)}
 					</NavigationMenu.Trigger>
 				</NavigationMenu.Item>
 			{/each}

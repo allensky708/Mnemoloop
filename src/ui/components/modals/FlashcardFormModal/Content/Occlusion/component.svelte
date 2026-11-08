@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { getLinkpath } from 'obsidian';
 	import { tick } from 'svelte';
 	import type { FlashcardOcclusionContent } from '@/schemas';
@@ -291,7 +292,7 @@
 
 <svelte:window onkeydown={handleWindowKeyDown} />
 
-<FormField label="Image">
+<FormField label={$t('Image')}>
 	{#if imageUrl}
 		<div class="ml-occlusion-form__image-header">
 			<span class="ml-occlusion-form__image-name">{image}</span>
@@ -301,26 +302,26 @@
 				{disabled}
 				onclick={() => (isPickerOpen = !isPickerOpen)}
 			>
-				Change image
+				{$t('Change image')}
 			</Button>
 		</div>
 	{:else}
 		<Button variant="secondary" {disabled} onclick={() => (isPickerOpen = !isPickerOpen)}>
-			Choose image
+			{$t('Choose image')}
 		</Button>
 	{/if}
 
 	{#if isPickerOpen}
 		<div class="ml-occlusion-form__picker">
 			<Input
-				label="Filter images"
+				label={$t('Filter images')}
 				value={query}
-				placeholder="Image name"
+				placeholder={$t('Image name')}
 				{disabled}
 				onchange={(value) => (query = value)}
 			/>
 			{#if filteredImageFiles.length === 0}
-				<p class="ml-occlusion-form__picker-empty">No images found.</p>
+				<p class="ml-occlusion-form__picker-empty">{$t('No images found.')}</p>
 			{:else}
 				<ul class="ml-occlusion-form__picker-list">
 					{#each filteredImageFiles as file (file.path)}
@@ -342,7 +343,7 @@
 </FormField>
 
 <div class="ml-occlusion-form__tools">
-	<Button variant="secondary" size="small" {disabled} onclick={addMask}>Add mask</Button>
+	<Button variant="secondary" size="small" {disabled} onclick={addMask}>{$t('Add mask')}</Button>
 </div>
 
 <div
@@ -350,7 +351,7 @@
 	class="ml-occlusion-form__surface ml-no-select"
 	class:ml-occlusion-form__surface--empty={!imageUrl}
 	tabindex="0"
-	aria-label="Mask drawing surface"
+	aria-label={$t('Mask drawing surface')}
 	role="cell"
 	onpaste={handlePaste}
 	onpointerdown={handlePointerDown}
@@ -393,19 +394,19 @@
 		{/if}
 	{:else}
 		<p class="ml-occlusion-form__placeholder">
-			Choose an image from the vault, or paste a wikilink to one into this area.
+			{$t('Choose an image from the vault, or paste a wikilink to one into this area.')}
 		</p>
 	{/if}
 </div>
 
 {#if imageUrl}
 	<span class="ml-occlusion-form__tools-hint">
-		Drag on the image to draw a mask; Ctrl-drag a mask to move it without resizing.
+		{$t('Drag on the image to draw a mask; Ctrl-drag a mask to move it without resizing.')}
 	</span>
 {/if}
 
 {#if masks.length > 0}
-	<FormField label={`Masks (${masks.length})`}>
+	<FormField label={$t('Masks ({count})', { count: masks.length })}>
 		{#each masks as mask, index (mask.id)}
 			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div
@@ -420,20 +421,20 @@
 				<span class="ml-occlusion-form__region-num">{index + 1}</span>
 				<div class="ml-occlusion-form__region-fields">
 					<Input
-						label={`Answer ${index + 1}`}
+						label={$t('Answer {number}', { number: index + 1 })}
 						value={mask.answer}
-						placeholder="Answer"
+						placeholder={$t('Answer')}
 						required
 						hasError={showValidation && !mask.answer.trim()}
-						errorMessage="Answer required"
+						errorMessage={$t('Answer required')}
 						{disabled}
 						onchange={(value) => updateMask(mask.id, { answer: value })}
 						onfocus={() => (activeMaskId = mask.id)}
 					/>
 					<Input
-						label={`Hint ${index + 1}`}
+						label={$t('Hint {number}', { number: index + 1 })}
 						value={mask.hint}
-						placeholder="Hint (optional)"
+						placeholder={$t('Hint (optional)')}
 						{disabled}
 						onchange={(value) => updateMask(mask.id, { hint: value })}
 						onfocus={() => (activeMaskId = mask.id)}

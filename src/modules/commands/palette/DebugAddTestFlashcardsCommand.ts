@@ -9,6 +9,7 @@ import { Notice } from 'obsidian';
 import { env } from '@/env';
 import { v4 as uuid } from 'uuid';
 import { State } from 'ts-fsrs';
+import { tr } from '@/i18n';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -78,7 +79,7 @@ function buildShuffledCards(): { front: string; back: string }[] {
 
 export class DebugAddTestFlashcardCommand extends BaseCommand {
 	readonly id = 'debug-add-test-flashcards';
-	readonly name = 'Generate 50 test flashcards [DEBUG]';
+	readonly name = tr('Generate 50 test flashcards [DEBUG]');
 
 	protected onRegister(): void {
 		if (env.mode === 'production') {
@@ -99,7 +100,7 @@ export class DebugAddTestFlashcardCommand extends BaseCommand {
 		const settingsAdapter = this.adapters.get(AdapterKey.settings);
 
 		if (!writer || !indexer || !settingsAdapter) {
-			new Notice('Error: Flashcard dependencies not found');
+			new Notice(tr('Error: Flashcard dependencies not found'));
 			return;
 		}
 
@@ -152,10 +153,10 @@ export class DebugAddTestFlashcardCommand extends BaseCommand {
 			}
 
 			await indexer.save();
-			new Notice('Added 50 test flashcards');
+			new Notice(tr('Added 50 test flashcards'));
 		} catch (error) {
 			const message = error instanceof Error ? error.message : 'Unknown error';
-			new Notice(`Error adding test flashcards: ${message}`);
+			new Notice(tr('Error adding test flashcards: {message}', { message }));
 			console.error('DebugAddTestFlashcardCommand error:', error);
 		}
 	}

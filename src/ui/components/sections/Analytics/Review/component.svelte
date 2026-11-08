@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import { ChartReviewSessions } from '@/ui/components/elements';
 	import { analyticsStore } from '@/ui/store/analytics.store';
 	import type AnalyticsReviewProps from './types';
@@ -30,24 +31,24 @@
 <div class="ml-analytics-review-stats {className ?? ''}">
 	<div class="ml-analytics-review-stats__grid">
 		<div class="ml-stat-card">
-			<span class="ml-stat-card__label">Total Reviews</span>
+			<span class="ml-stat-card__label">{$t('Total Reviews')}</span>
 			<span class="ml-stat-card__value">{totalReviews.toLocaleString()}</span>
-			<span class="ml-stat-card__description">cards reviewed</span>
+			<span class="ml-stat-card__description">{$t('cards reviewed')}</span>
 		</div>
 		<div class="ml-stat-card">
-			<span class="ml-stat-card__label">Total Time</span>
+			<span class="ml-stat-card__label">{$t('Total Time')}</span>
 			<span class="ml-stat-card__value">{formatDuration(totalTime)}</span>
-			<span class="ml-stat-card__description">spent reviewing</span>
+			<span class="ml-stat-card__description">{$t('spent reviewing')}</span>
 		</div>
 		<div class="ml-stat-card">
-			<span class="ml-stat-card__label">Best Streak</span>
+			<span class="ml-stat-card__label">{$t('Best Streak')}</span>
 			<span class="ml-stat-card__value">{bestStreak}</span>
-			<span class="ml-stat-card__description">days in a row</span>
+			<span class="ml-stat-card__description">{$t('days in a row')}</span>
 		</div>
 		<div class="ml-stat-card">
-			<span class="ml-stat-card__label">Avg Accuracy</span>
+			<span class="ml-stat-card__label">{$t('Avg Accuracy')}</span>
 			<span class="ml-stat-card__value">{formatPercent(avgAccuracy)}</span>
-			<span class="ml-stat-card__description">retention rate</span>
+			<span class="ml-stat-card__description">{$t('retention rate')}</span>
 		</div>
 	</div>
 

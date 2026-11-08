@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { scaleThreshold } from 'd3-scale';
 	import { Chart, Layer, Month, Rect, Tooltip } from 'layerchart';
 	import type ChartSessionsProps from './types';
@@ -95,13 +96,13 @@
 <div class="ml-sessions {className}">
 	<!-- Header -->
 	<header class="ml-sessions__header">
-		<h3 class="ml-sessions__title">Review Sessions</h3>
-		<p class="ml-sessions__subtitle">Sessions completed by day</p>
+		<h3 class="ml-sessions__title">{$t('Review Sessions')}</h3>
+		<p class="ml-sessions__subtitle">{$t('Sessions completed by day')}</p>
 	</header>
 
 	<div class="ml-sessions__body">
 		<!-- Chart -->
-		<ChartEmptyState show={!stats} message="No sessions data, start reviewing to see your progress">
+		<ChartEmptyState show={!stats} message={$t('No sessions data, start reviewing to see your progress')}>
 			<div bind:this={containerEl} class="ml-sessions__chart-container">
 				<Chart
 					{data}
@@ -152,7 +153,7 @@
 							{#snippet children({ data: day })}
 								<Tooltip.Header value={day.date} format="day" />
 								<Tooltip.List>
-									<Tooltip.Item label="Sessions" value={day.value} format="integer" />
+									<Tooltip.Item label={$t('Sessions')} value={day.value} format="integer" />
 								</Tooltip.List>
 							{/snippet}
 						</Tooltip.Root>
@@ -164,12 +165,12 @@
 			<span class="ml-sessions__stat-badge">
 				<span class="ml-sessions__stat-dot"></span>
 				<span class="ml-sessions__stat-value">{sessionStats.totalSessions}</span>
-				<span>total sessions</span>
+				<span>{$t('total sessions')}</span>
 			</span>
 			<span class="ml-sessions__stat-badge">
 				<span class="ml-sessions__stat-dot"></span>
 				<span class="ml-sessions__stat-value">{sessionStats.activeDays}</span>
-				<span>active days</span>
+				<span>{$t('active days')}</span>
 			</span>
 		</div>
 	</div>

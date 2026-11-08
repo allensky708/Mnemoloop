@@ -1,9 +1,10 @@
 import { BaseCommand } from '@/modules/commands/BaseCommand';
+import { tr } from '@/i18n';
 import { APP_VIEW } from '@/ui/views/App/AppView';
 
 export class OpenDashboardCommand extends BaseCommand {
 	readonly id = 'open-dashboard';
-	readonly name = 'Open dashboard';
+	readonly name = tr('Open dashboard');
 
 	protected onRegister(): void {
 		this.plugin.addCommand({

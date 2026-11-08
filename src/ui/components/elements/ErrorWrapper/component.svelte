@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { Logger } from '@/utils/Logger';
 	import { Button, Icon } from '@/ui/components';
 	import type ErrorWrapperProps from './types';
@@ -48,7 +49,7 @@
 		// Check if we've exceeded max retries
 		if (retryCount >= maxRetries) {
 			retryExceeded = true;
-			errorMessage = 'Unable to recover after multiple attempts.';
+			errorMessage = $t('Unable to recover after multiple attempts.');
 		}
 	}
 
@@ -72,10 +73,10 @@
 	function getFriendlyErrorMessage(message: string): string {
 		// Add actionable guidance to error messages
 		if (message.includes('network') || message.includes('fetch')) {
-			return `${message} Check your internet connection and try again.`;
+			return `${message} ${$t('Check your internet connection and try again.')}`;
 		}
 		if (message.includes('parse') || message.includes('JSON')) {
-			return `${message} The data may be corrupted. Try refreshing the page.`;
+			return `${message} ${$t('The data may be corrupted. Try refreshing the page.')}`;
 		}
 		return message;
 	}
@@ -92,12 +93,12 @@
 					<Icon name="alert-triangle" size={32} />
 				</div>
 				<div class="ml-error-wrapper__message">
-					<h3 class="ml-error-wrapper__title">Something went wrong</h3>
+					<h3 class="ml-error-wrapper__title">{$t('Something went wrong')}</h3>
 					<p class="ml-error-wrapper__description">{displayMessage}</p>
 					{#if showError && errorMessage && !retryExceeded}
 						<div class="ml-error-wrapper__details">
 							<details>
-								<summary>Error details</summary>
+								<summary>{$t('Error details')}</summary>
 								<code class="ml-error-wrapper__code">{errorMessage}</code>
 							</details>
 						</div>
@@ -109,12 +110,12 @@
 				<div class="ml-error-wrapper__actions">
 					{#if retryCount > 0}
 						<span class="ml-error-wrapper__retry-info"
-							>Retry attempt {retryCount} of {maxRetries}</span
+							>{$t('Retry attempt {count} of {max}', { count: retryCount, max: maxRetries })}</span
 						>
 					{/if}
 					<Button variant="primary" onclick={handleRetry}>
 						<Icon name="refresh-cw" size={16} />
-						Retry
+						{$t('Retry')}
 					</Button>
 				</div>
 			{/if}
@@ -122,11 +123,11 @@
 			{#if retryExceeded}
 				<div class="ml-error-wrapper__actions">
 					<span class="ml-error-wrapper__retry-info ml-error-wrapper__retry-info--exceeded">
-						Maximum retries exceeded
+						{$t('Maximum retries exceeded')}
 					</span>
 					<Button variant="secondary" onclick={() => window.location.reload()}>
 						<Icon name="rotate-ccw" size={16} />
-						Reload Page
+						{$t('Reload Page')}
 					</Button>
 				</div>
 			{/if}

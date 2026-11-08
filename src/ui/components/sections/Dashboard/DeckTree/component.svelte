@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import { Card, Icon } from '@/ui/components';
 	import DeckTreeNode from '../DeckTreeNode/component.svelte';
 	import type DeckTreeProps from './types';
@@ -30,7 +31,7 @@
 			onkeydown={handleAllKeydown}
 		>
 			<Icon name="layers" size={16} />
-			<span class="ml-deck-tree__all-decks-name">All decks</span>
+			<span class="ml-deck-tree__all-decks-name">{$t('All decks')}</span>
 		</div>
 
 		<div class="ml-deck-tree__nodes">

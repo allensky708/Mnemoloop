@@ -2,6 +2,7 @@ import { EventBus } from '@/modules/events';
 import { DashboardOpenEvent } from '@/modules/events/domains/ui/dashboard';
 import type { BannerConfig } from '@/ui/components/elements/Banner/types';
 import { settingsStore } from '@/ui/store/settings.store';
+import { tr } from '@/i18n';
 import { writable, type Writable } from 'svelte/store';
 
 interface BannerStoreState {
@@ -15,7 +16,7 @@ const BANNER_DEFINITIONS: BannerConfig[] = [
 		message: 'Want a new feature or suggest an improvement?',
 		link: {
 			label: 'Open an issue',
-			url: 'https://github.com/Marco-Pozzecco/mnemoloop-plugin/issues',
+			url: 'https://github.com/allensky708/Mnemoloop/issues',
 		},
 	},
 ];
@@ -64,7 +65,14 @@ export class BannerStore {
 			if (this.isDismissedToday(banner.id)) continue;
 			if (!this.meetsCondition(banner)) continue;
 
-			this._store.update((s) => ({ ...s, activeBanner: banner }));
+			this._store.update((s) => ({
+				...s,
+				activeBanner: {
+					...banner,
+					message: tr(banner.message),
+					link: banner.link ? { ...banner.link, label: tr(banner.link.label) } : undefined,
+				},
+			}));
 			return;
 		}
 		this._store.update((s) => ({ ...s, activeBanner: null }));

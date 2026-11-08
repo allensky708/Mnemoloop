@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { Button, Icon } from '@/ui/components';
 	import type EmptyStateProps from './types';
 
@@ -7,9 +8,9 @@
 
 <div class="ml-empty-state">
 	<Icon name="check-circle" size={48} />
-	<h2>Session complete!</h2>
-	<p>You've reviewed all cards in this session.</p>
-	<Button variant="primary" onclick={onEndSession}>Return to dashboard</Button>
+	<h2>{$t('Session complete!')}</h2>
+	<p>{$t("You've reviewed all cards in this session.")}</p>
+	<Button variant="primary" onclick={onEndSession}>{$t('Return to dashboard')}</Button>
 </div>
 
 <style lang="scss">

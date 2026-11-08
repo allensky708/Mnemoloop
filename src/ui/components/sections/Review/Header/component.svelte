@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { Button, Icon, ProgressBar } from '@/ui/components';
 	import type HeaderProps from './types';
 
@@ -40,7 +41,7 @@
 			size="small"
 			disabled={!canUndo}
 			onclick={onUndo}
-			ariaLabel="Undo last rating"
+			ariaLabel={$t('Undo last rating')}
 		>
 			<Icon name="undo" size={18} />
 		</Button>

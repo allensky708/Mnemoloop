@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tr } from '@/i18n';
 	import { EventBus } from '@/modules/events';
 	import { DashboardOpenEvent } from '@/modules/events/domains/ui/dashboard';
 	import { IndexKey } from '@/types/indexes';
@@ -46,7 +47,7 @@
 	function onStartPriming() {
 		const selection: PrimingSelection = {
 			deckFilter: selectedDeck?.fullPath,
-			deckLabel: selectedDeck?.name ?? 'All decks',
+			deckLabel: selectedDeck?.name ?? tr('All decks'),
 		};
 		void primingController.start(selection);
 	}
@@ -66,7 +67,7 @@
 	$effect(() => {
 		const selection: PrimingSelection = {
 			deckFilter: selectedDeck?.fullPath,
-			deckLabel: selectedDeck?.name ?? 'All decks',
+			deckLabel: selectedDeck?.name ?? tr('All decks'),
 		};
 		const threshold = difficultyThreshold;
 		void deckTree.nodes;
@@ -108,7 +109,7 @@
 </script>
 
 <ErrorWrapper
-	fallback="Unable to load dashboard statistics"
+	fallback={$t('Unable to load dashboard statistics')}
 	showError={true}
 	maxRetries={3}
 	errorContext="DashboardView"

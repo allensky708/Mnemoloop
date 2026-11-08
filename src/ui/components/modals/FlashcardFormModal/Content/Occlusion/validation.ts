@@ -1,5 +1,6 @@
 import type { FlashcardOcclusionContent, FlashcardOcclusionMask } from '@/schemas';
 import { CardType } from '@/schemas';
+import { tr } from '@/i18n';
 
 export type NormalizedRect = [number, number, number, number];
 
@@ -26,11 +27,11 @@ export interface ImageDimensions {
  * Returns null when the card can be submitted, or the message to show.
  */
 export function validateOcclusion(image: string, masks: EditableOcclusionMask[]): string | null {
-	if (!image.trim()) return 'An image is required.';
-	if (masks.length === 0) return 'At least one mask is required.';
+	if (!image.trim()) return tr('An image is required.');
+	if (masks.length === 0) return tr('At least one mask is required.');
 
 	const emptyIndex = masks.findIndex((mask) => !mask.answer.trim());
-	if (emptyIndex !== -1) return `Mask ${emptyIndex + 1} must have an answer.`;
+	if (emptyIndex !== -1) return tr('Mask {number} must have an answer.', { number: emptyIndex + 1 });
 
 	return null;
 }

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { Combobox } from 'bits-ui';
 	import { getComboboxContext } from '../context';
 	import Icon from '../../Icon/component.svelte';
@@ -26,7 +27,7 @@
 <Combobox.Trigger
 	bind:ref
 	{...rest}
-	aria-label={ariaLabel ?? htmlAriaLabel ?? 'Open combobox'}
+	aria-label={ariaLabel ?? htmlAriaLabel ?? $t('Open combobox')}
 	class="ml-combobox__trigger {className}"
 >
 	{#if children}

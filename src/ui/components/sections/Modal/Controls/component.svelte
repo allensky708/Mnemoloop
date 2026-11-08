@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { Button } from '@/ui/components/elements';
 	import type ModalControlsProps from './types';
 
@@ -14,9 +15,9 @@
 </script>
 
 <div class="ml-modal-controls">
-	<Button variant="secondary" onclick={handleCancel} disabled={isLoading}>Cancel</Button>
+	<Button variant="secondary" onclick={handleCancel} disabled={isLoading}>{$t('Cancel')}</Button>
 	<Button variant="primary" onclick={handleConfirm} disabled={isLoading}>
-		{isLoading ? 'Saving...' : 'Save'}
+		{isLoading ? $t('Saving...') : $t('Save')}
 	</Button>
 </div>
 

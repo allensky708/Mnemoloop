@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import Button from '@/ui/components/elements/Button/component.svelte';
 	import type Props from './types';
 
@@ -7,7 +8,7 @@
 
 {#if state.status === 'loading'}
 	<div class="ml-priming__state" aria-live="polite">
-		<h2 class="ml-priming__state-heading">Finding difficult notes</h2>
+		<h2 class="ml-priming__state-heading">{$t('Finding difficult notes')}</h2>
 		<div class="ml-priming__loading-shell" aria-hidden="true">
 			<div class="ml-priming__loading-outline">
 				<span class="ml-priming__skeleton ml-priming__skeleton--line"></span>
@@ -24,22 +25,25 @@
 	</div>
 {:else if state.status === 'empty'}
 	<div class="ml-priming__state">
-		<h2 class="ml-priming__state-heading">No difficult notes to prime</h2>
+		<h2 class="ml-priming__state-heading">{$t('No difficult notes to prime')}</h2>
 		<p class="ml-priming__state-copy">
-			{`No eligible Markdown source notes in ${state.selection.deckLabel} are linked to active cards due now above difficulty ${state.threshold.toFixed(1)}.`}
+			{$t(
+				'No eligible Markdown source notes in {deck} are linked to active cards due now above difficulty {threshold}.',
+				{ deck: $t(state.selection.deckLabel), threshold: state.threshold.toFixed(1) },
+			)}
 		</p>
 		<div class="ml-priming__state-controls">
-			<Button variant="secondary" size="medium" onclick={onDashboard}>Back to dashboard</Button>
-			<Button variant="primary" size="medium" onclick={onBeginReview}>Begin review</Button>
+			<Button variant="secondary" size="medium" onclick={onDashboard}>{$t('Back to dashboard')}</Button>
+			<Button variant="primary" size="medium" onclick={onBeginReview}>{$t('Begin review')}</Button>
 		</div>
 	</div>
 {:else if state.status === 'unavailable'}
 	<div class="ml-priming__state">
-		<h2 class="ml-priming__state-heading">Couldn’t prepare your note map</h2>
-		<p class="ml-priming__state-copy">Check your vault links and try again.</p>
+		<h2 class="ml-priming__state-heading">{$t('Couldn’t prepare your note map')}</h2>
+		<p class="ml-priming__state-copy">{$t('Check your vault links and try again.')}</p>
 		<div class="ml-priming__state-controls">
-			<Button variant="secondary" size="medium" onclick={onBeginReview}>Begin review</Button>
-			<Button variant="primary" size="medium" onclick={onRetry}>Try again</Button>
+			<Button variant="secondary" size="medium" onclick={onBeginReview}>{$t('Begin review')}</Button>
+			<Button variant="primary" size="medium" onclick={onRetry}>{$t('Try again')}</Button>
 		</div>
 	</div>
 {/if}

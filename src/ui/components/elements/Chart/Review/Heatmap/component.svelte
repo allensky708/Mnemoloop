@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { scaleThreshold } from 'd3-scale';
 	import { Calendar, Chart, Layer, Rect, Tooltip } from 'layerchart';
 	import type HeatMapProps from './types';
@@ -54,8 +55,8 @@
 <div class="ml-heatmap {className}">
 	<!-- Header -->
 	<header class="ml-heatmap__header">
-		<h3 class="ml-heatmap__title">Learning Activity</h3>
-		<p class="ml-heatmap__subtitle">Total review count by day</p>
+		<h3 class="ml-heatmap__title">{$t('Learning Activity')}</h3>
+		<p class="ml-heatmap__subtitle">{$t('Total review count by day')}</p>
 	</header>
 
 	<div class="ml-heatmap__body">
@@ -101,16 +102,16 @@
 						{#snippet children({ data })}
 							<Tooltip.Header value={data.dateString} />
 							<Tooltip.List>
-								<Tooltip.Item label="Cards reviewed" value={data.value} format="integer" />
+								<Tooltip.Item label={$t('Cards reviewed')} value={data.value} format="integer" />
 								{#if data.data}
 									<Tooltip.Item
-										label="Correct"
+										label={$t('Correct')}
 										value="{data.data.correct_count} ({formatRetentionRate(
 											data.data.retention_rate,
 										)})"
 									/>
 									<Tooltip.Item
-										label="Sessions"
+										label={$t('Sessions')}
 										value={data.data.sessions_completed}
 										format="integer"
 									/>
@@ -125,12 +126,12 @@
 			<span class="ml-heatmap__stat-badge">
 				<span class="ml-heatmap__stat-dot"></span>
 				<span class="ml-heatmap__stat-value">{yearStats.totalCards}</span>
-				<span>cards reviewed</span>
+				<span>{$t('cards reviewed')}</span>
 			</span>
 			<span class="ml-heatmap__stat-badge">
 				<span class="ml-heatmap__stat-dot"></span>
 				<span class="ml-heatmap__stat-value">{yearStats.activeDays}</span>
-				<span>active days</span>
+				<span>{$t('active days')}</span>
 			</span>
 		</div>
 	</div>

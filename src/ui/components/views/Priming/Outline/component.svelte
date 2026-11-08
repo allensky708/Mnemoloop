@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import { Button, Collapsible, Icon } from '@/ui/components/elements';
 	import { cn } from '@/ui/components/utils';
 	import type { PrimingCluster, PrimingNote } from '@/ui/store/priming.store';
@@ -30,7 +31,7 @@
 	}
 
 	function linkCountLabel(count: number): string {
-		return `${count} inbound ${count === 1 ? 'link' : 'links'}`;
+		return $tn(count, '{count} inbound link', '{count} inbound links', { count });
 	}
 </script>
 
@@ -45,9 +46,9 @@
 	>
 		<span class="ml-priming__note-title">{note.title}</span>
 		<span class="ml-priming__note-meta">
-			{linkCountLabel(note.inboundLinkCount)} · Average difficulty {note.averageDifficulty.toFixed(
-				1,
-			)}
+			{linkCountLabel(note.inboundLinkCount)} · {$t('Average difficulty {value}', {
+				value: note.averageDifficulty.toFixed(1),
+			})}
 		</span>
 	</Button>
 {/snippet}
@@ -63,7 +64,7 @@
 		>
 			<div class="ml-priming__cluster-disclosure-label">
 				<Icon name="chevron-down" size={16} />
-				Cluster {index + 1} of {primingState.clusters.length}
+				{$t('Cluster {current} of {total}', { current: index + 1, total: primingState.clusters.length })}
 			</div>
 			{#if cluster.title}
 				<span class="ml-priming__cluster-disclosure-title">{cluster.title}</span>
@@ -82,7 +83,7 @@
 	</Collapsible.Root>
 {/snippet}
 
-<nav class="ml-priming__outline" aria-label="Backlink clusters">
+<nav class="ml-priming__outline" aria-label={$t('Backlink clusters')}>
 	<div class="ml-priming__outline-stack ml-priming__outline-stack-desktop">
 		{#each primingState.clusters as cluster, clusterIndex (cluster.notes[0]?.path)}
 			{@render Cluster(isActiveCluster(cluster), clusterIndex, cluster, false)}

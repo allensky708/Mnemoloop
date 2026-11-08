@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { ChartEmptyState } from '@/ui/components';
 	import { AreaChart, defaultChartPadding, Tooltip } from 'layerchart';
 	import type ChartCumulativeCardsProps from './types';
@@ -12,12 +13,12 @@
 
 <div class="ml-chart-cumulative {className ?? ''}">
 	<div class="ml-chart-cumulative__header">
-		<div class="ml-chart-cumulative__title">Cumulative flashcards</div>
-		<div class="ml-chart-cumulative__subtitle">Cumulative amount of flashcards over time</div>
+		<div class="ml-chart-cumulative__title">{$t('Cumulative flashcards')}</div>
+		<div class="ml-chart-cumulative__subtitle">{$t('Cumulative amount of flashcards over time')}</div>
 	</div>
 	<ChartEmptyState
 		show={data.length <= 1}
-		message="No flashcards yet. Start adding cards to see your growth."
+		message={$t('No flashcards yet. Start adding cards to see your growth.')}
 	>
 		<AreaChart
 			{data}
@@ -47,7 +48,7 @@
 					{#snippet children({ data: point })}
 						<Tooltip.Header value={point.date} format="day" />
 						<Tooltip.List>
-							<Tooltip.Item label="Total cards" value={point.cumulative} format="integer" />
+							<Tooltip.Item label={$t('Total cards')} value={point.cumulative} format="integer" />
 						</Tooltip.List>
 					{/snippet}
 				</Tooltip.Root>

@@ -1,4 +1,5 @@
 import { BaseCommand } from '@/modules/commands/BaseCommand';
+import { tr } from '@/i18n';
 import { modalStore, ModalViewEnum } from '@/ui/store/modal.store';
 import { SvelteModal } from '@/ui/views/Modal/ModalView';
 import { ModalClassNames } from '@/ui/views/Modal/types';
@@ -6,7 +7,7 @@ import { Menu, TAbstractFile, TFile } from 'obsidian';
 
 export class CreateFlashcardFromFileModalCommand extends BaseCommand {
 	readonly id = 'create-flashcard-from-file-modal';
-	readonly name = 'Create flashcard from file';
+	readonly name = tr('Create flashcard from file');
 
 	protected onRegister(): void {
 		const eventRef = this.plugin.app.workspace.on(

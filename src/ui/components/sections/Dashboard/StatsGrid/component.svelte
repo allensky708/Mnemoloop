@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import type DashboardStatsGridProps from './types';
 
 	let { stats, className }: DashboardStatsGridProps = $props();
@@ -10,27 +11,27 @@
 
 <div class="ml-dashboard__stats-grid {className}">
 	<div class="ml-stat-card">
-		<span class="ml-stat-card__label">Due</span>
+		<span class="ml-stat-card__label">{$t('Due')}</span>
 		<span class="ml-stat-card__value">{stats.flashcard.due_now}</span>
-		<span class="ml-stat-card__description">cards to review</span>
+		<span class="ml-stat-card__description">{$t('cards to review')}</span>
 	</div>
 
 	<div class="ml-stat-card">
-		<span class="ml-stat-card__label">Retention</span>
+		<span class="ml-stat-card__label">{$t('Retention')}</span>
 		<span class="ml-stat-card__value">{formatPercent(stats.flashcard.retention_rate)}</span>
-		<span class="ml-stat-card__description">average accuracy</span>
+		<span class="ml-stat-card__description">{$t('average accuracy')}</span>
 	</div>
 
 	<div class="ml-stat-card">
-		<span class="ml-stat-card__label">Streak</span>
+		<span class="ml-stat-card__label">{$t('Streak')}</span>
 		<span class="ml-stat-card__value">{stats.flashcard.current_streak}</span>
-		<span class="ml-stat-card__description">days in a row</span>
+		<span class="ml-stat-card__description">{$t('days in a row')}</span>
 	</div>
 
 	<div class="ml-stat-card">
-		<span class="ml-stat-card__label">Total cards</span>
+		<span class="ml-stat-card__label">{$t('Total cards')}</span>
 		<span class="ml-stat-card__value">{stats.flashcard.total_cards}</span>
-		<span class="ml-stat-card__description">in your vault</span>
+		<span class="ml-stat-card__description">{$t('in your vault')}</span>
 	</div>
 </div>
 

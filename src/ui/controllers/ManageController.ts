@@ -1,4 +1,5 @@
 import type { ParseResult } from '@/interfaces/parser/utils';
+import { tr } from '@/i18n';
 import { EventBus } from '@/modules/events/core';
 import {
 	FlashcardIndexGetAllRequestEvent,
@@ -219,7 +220,9 @@ export class ManageController {
 				if (mutation) {
 					this._patchLocally(filepath, mutation.before);
 					new Notice(
-						`Couldn't save ${mutation.label.toLowerCase()}. Restored the last saved value.`,
+						tr("Couldn't save {label}. Restored the last saved value.", {
+							label: tr(mutation.label).toLowerCase(),
+						}),
 					);
 				}
 				return;
@@ -229,11 +232,15 @@ export class ManageController {
 			if (!mutation) return;
 
 			if (this._matchesExpectedMetadata(result.entity, mutation.expected)) {
-				new Notice(`${mutation.label} saved.`);
+				new Notice(tr('{label} saved.', { label: tr(mutation.label) }));
 				return;
 			}
 
-			new Notice(`Couldn't save ${mutation.label.toLowerCase()}. Restored the last saved value.`);
+			new Notice(
+				tr("Couldn't save {label}. Restored the last saved value.", {
+					label: tr(mutation.label).toLowerCase(),
+				}),
+			);
 		});
 		void EventBus.instance.publish(new FlashcardParserParseMetadataRequestEvent({ filepath }));
 	}
@@ -254,10 +261,10 @@ export class ManageController {
 			if (!original) return;
 			if (result.success && result.entity) {
 				manageStore.setFlashcards([...manageStore.state.flashcards, original]);
-				new Notice('Couldn’t delete flashcard. It has been restored.');
+				new Notice(tr('Couldn’t delete flashcard. It has been restored.'));
 				return;
 			}
-			new Notice('Flashcard deleted.');
+			new Notice(tr('Flashcard deleted.'));
 		});
 		void EventBus.instance.publish(new FlashcardParserParseMetadataRequestEvent({ filepath }));
 	}

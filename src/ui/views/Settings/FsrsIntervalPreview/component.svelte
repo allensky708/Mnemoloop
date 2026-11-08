@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import type { FSRSParameters, Grade } from 'ts-fsrs';
 	import { createEmptyCard, FSRS, generatorParameters, Rating } from 'ts-fsrs';
 	import { settingsStore } from '@/ui/store/settings.store';
@@ -35,20 +36,20 @@
 
 <div class="ml-fsrs-preview-wrapper">
 	<div class="ml-fsrs-preview">
-		<h4 class="ml-fsrs-preview__title">Interval preview</h4>
+		<h4 class="ml-fsrs-preview__title">{$t('Interval preview')}</h4>
 		<table class="ml-fsrs-preview__table">
 			<thead>
 				<tr>
-					<th>Rating</th>
+					<th>{$t('Rating')}</th>
 					{#each Array.from({ length: 5 }, (_, i) => i + 1) as i (i)}
-						<th>Review {i}</th>
+						<th>{$t('Review {number}', { number: i })}</th>
 					{/each}
 				</tr>
 			</thead>
 			<tbody>
 				{#each preview() as row (row.key)}
 					<tr>
-						<td>{row.rating}</td>
+						<td>{$t(row.rating)}</td>
 						{#each row.intervals as interval (interval.key)}
 							<td>{interval.interval}</td>
 						{/each}

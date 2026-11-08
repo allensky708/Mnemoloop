@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '@/i18n';
 	import { Button, Icon } from '@/ui/components';
 	import { tokens } from '@/utils/token';
 	import { Rating } from 'ts-fsrs';
@@ -39,11 +40,11 @@
 				class="ml-score-controls__button"
 				onclick={() => !disabled && onSubmitRating(rating.value)}
 				{disabled}
-				ariaLabel="Rate as {rating.label}"
+				ariaLabel={$t('Rate as {label}', { label: $t(rating.label) })}
 			>
 				<div class="ml-score-controls__button-content">
 					<Icon name={rating.icon || ''} size={18} />
-					<span class="ml-score-controls__label">{rating.label}</span>
+					<span class="ml-score-controls__label">{$t(rating.label)}</span>
 				</div>
 			</Button>
 			<span class="ml-score-controls__shortcut">{rating.shortcut}</span>

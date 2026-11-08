@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import { ProgressBar } from '@/ui/components/elements';
 	import type Props from './types';
 
@@ -8,13 +9,13 @@
 {#if state.status === 'ready'}
 	<div class="ml-priming__progress">
 		<span class="ml-priming__progress-count">
-			{state.currentIndex + 1} of {state.notes.length} notes
+			{$t('{current} of {total} notes', { current: state.currentIndex + 1, total: state.notes.length })}
 		</span>
 		<ProgressBar
 			max={state.notes.length}
 			value={state.currentIndex + 1}
 			showPercentage
-			ariaLabel="Priming progress"
+			ariaLabel={$t('Priming progress')}
 		/>
 	</div>
 {/if}

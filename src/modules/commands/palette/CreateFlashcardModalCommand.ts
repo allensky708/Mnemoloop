@@ -1,11 +1,12 @@
 import { BaseCommand } from '@/modules/commands/BaseCommand';
+import { tr } from '@/i18n';
 import { modalStore, ModalViewEnum } from '@/ui/store/modal.store';
 import { SvelteModal } from '@/ui/views/Modal/ModalView';
 import { ModalClassNames } from '@/ui/views/Modal/types';
 
 export class CreateFlashcardModalCommand extends BaseCommand {
 	readonly id = 'create-flashcard-modal';
-	readonly name = 'Create flashcard';
+	readonly name = tr('Create flashcard');
 
 	protected onRegister(): void {
 		this.plugin.addCommand({

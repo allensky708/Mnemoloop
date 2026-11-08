@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t, tn } from '@/i18n';
 	import { renderMarkdown } from '@/ui/actions/markdown';
 	import { Icon } from '@/ui/components/elements';
 	import Button from '@/ui/components/elements/Button/component.svelte';
@@ -33,7 +34,7 @@
 				onclick={onPrevious}
 			>
 				<Icon name="arrow-left" size={16} />
-				Previous note
+				{$t('Previous note')}
 			</Button>
 
 			{#if isLastNote}
@@ -44,7 +45,7 @@
 					onclick={onNextOrBeginReview}
 				>
 					<Icon name="play" size={16} />
-					Begin review
+					{$t('Begin review')}
 				</Button>
 			{:else}
 				<Button
@@ -53,7 +54,7 @@
 					class="ml-priming__control"
 					onclick={onNextOrBeginReview}
 				>
-					Next note
+					{$t('Next note')}
 					<Icon name="arrow-right" size={16} />
 				</Button>
 			{/if}
