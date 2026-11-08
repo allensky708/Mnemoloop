@@ -169,8 +169,9 @@
 		font-weight: $font-semibold;
 		flex: 2 1 0;
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: center;
 		justify-content: center;
+		text-align: center;
 		gap: 2px;
 		white-space: normal;
 		background-color: $background-primary;
@@ -187,12 +188,14 @@
 
 	:global(.ml-prime-button__label) {
 		font-weight: $font-semibold;
+		text-align: center;
 	}
 
 	:global(.ml-prime-button__support) {
 		font-size: 12px;
 		font-weight: $font-normal;
 		color: $text-muted;
+		text-align: center;
 	}
 
 	@media (max-width: 480px) {

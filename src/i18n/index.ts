@@ -1,3 +1,4 @@
+import { defaultLocale } from '@layerstack/utils';
 import { getLanguage } from 'obsidian';
 import { derived, get, writable } from 'svelte/store';
 import { zh } from './locales/zh';
@@ -40,9 +41,19 @@ export function resolveLocale(setting: LanguageSetting): Locale {
 	return setting === 'auto' ? detectLocale() : setting;
 }
 
+/**
+ * Keep LayerChart's date/month formatting in sync with the plugin language.
+ * LayerChart formats month labels through @layerstack/utils' shared default
+ * locale, which otherwise stays English.
+ */
+function applyDateLocale(current: Locale): void {
+	defaultLocale.locale = current === 'zh' ? 'zh-CN' : 'en';
+}
+
 export function initI18n(setting: unknown): Locale {
 	const resolved = resolveLocale(normalizeLanguageSetting(setting));
 	localeWritable.set(resolved);
+	applyDateLocale(resolved);
 	return resolved;
 }
 
