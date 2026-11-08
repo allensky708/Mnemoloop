@@ -1,129 +1,139 @@
-# Mnemoloop
+# Mnemoloop(中文版)
 
-**English** | [简体中文](./README.zh-CN.md)
+> Obsidian 中主动学习的一层。
+> 由 FSRS 驱动的间隔重复，让你的笔记保持整洁。
 
-> 简体中文版由 [allensky708](https://github.com/allensky708) 维护，界面语言可在 **Settings → Mnemoloop → Language** 中切换。
+[English](./README.en.md) | **简体中文**
 
-> The active knowledge layer for Obsidian.  
-> FSRS-powered spaced repetition that keeps your notes pristine.
+这是 [Mnemoloop](https://github.com/Marco-Pozzecco/mnemoloop-plugin) 的简体中文本地化版本，基于上游 `2.1.1`，使用 i18n 实现中英双语界面。当前版本 **2.1.3**，插件 ID 为 `mnemoloop-zh`，名称为 **Mnemoloop(中文版)**。
 
-<!--
-TODO: Add hero screenshot or GIF here showing the dashboard + review interface
-Recommended: 800-1200px wide, light & dark theme variants
--->
+界面语言默认跟随 Obsidian，也可以在 **设置 → Mnemoloop(中文版) → Language** 中手动选择 `跟随 Obsidian`、`English` 或 `简体中文`。
 
-Mnemoloop is a local-first spaced repetition system built directly into Obsidian. Unlike plugins that embed flashcard syntax into your source notes, Mnemoloop stores every flashcard as its own Markdown file: portable, git-friendly, and completely isolated from your thinking space. It pairs FSRS scheduling with a dashboard for heatmaps, deck trees, and retention analytics, so you review more in less time without leaving Obsidian.
-
-Your notes stay pristine. Your retention improves. Your workflow never leaves Obsidian. **Start remembering more, reviewing less.**
+汉化与维护：[allensky708](https://github.com/allensky708)。原项目版权归 Marco Pozzecco 所有，按 MIT 协议发布。
 
 ---
 
-## Why Mnemoloop?
+## 为什么选择 Mnemoloop？
 
-### Your Notes Stay Pristine
+### 笔记保持原样
 
-Every flashcard is a standalone Markdown file in a dedicated directory, linked back to its source note via YAML frontmatter. Your thinking space remains exactly as you designed it—no `!!` or `??` markers polluting your carefully organized literature reviews, course notes or research documents.
+每张卡片都是独立目录中的 Markdown 文件，通过 YAML frontmatter 链接回来源笔记。你的思考空间不会被 `!!`、`??` 之类的标记污染。
 
-### FSRS, Inside Obsidian
+### FSRS 原生集成
 
-Mnemoloop brings native FSRS scheduling into Obsidian, the same scientifically validated algorithm powering modern Anki. Better retention, fewer reviews, no context switching.
+Mnemoloop 把 FSRS 调度直接带进 Obsidian。它与现代 Anki 使用同类的科学调度算法：更高的记忆保持率、更少的复习次数、不用切换应用。
 
-### Built for Mobile from Day One
+### 为移动端设计
 
-Swipe to rate. Tap to flip. Responsive layouts. Mnemoloop works as well on your phone as on your desktop, natively inside Obsidian Mobile.
+左右滑动评分，点击翻面，响应式布局。手机和桌面都能在 Obsidian 内原生使用。
 
-### Reliability
+### 可靠
 
-Dual-source truth: a fast JSON index for queries, plus human-readable YAML frontmatter on every card for transparency and recovery. Even if the index is corrupted, all your SRS data lives in Markdown and can rebuild everything. Error boundaries ensure the plugin never brings down Obsidian.
-
----
-
-## Features
-
-| Feature                      | Description                                                                                        |
-| ---------------------------- | -------------------------------------------------------------------------------------------------- |
-| 🧠 **FSRS Scheduling**       | Scientifically validated spaced repetition algorithm for better retention with fewer reviews       |
-| 📄 **1 File = 1 Flashcard**  | Each card is a standalone Markdown file—portable, version-controllable, never touches source notes |
-| 📊 **Learning Dashboard**    | Heatmaps, deck tree, daily goals, and retention rates                                              |
-| 🔒 **Local-First & Private** | Core features work fully offline. No telemetry. No data mining. Your knowledge belongs to you.     |
-| 🏗️ **Self-Healing Data**     | JSON index + YAML dual-source truth with corruption recovery                                       |
-| ⚡ **High Performance**      | Lazy card loading, debounced vault watching, and 50,000-card performance targets                   |
-| 📈 **Learning Analytics**    | Track retention, forecast, and cumulative progress over time                                       |
-| 📱 **Mobile Touch UI**       | Swipe left/right to rate, tap to flip: native feel inside Obsidian Mobile                          |
-| 🔔 **Stale Detection**       | Source note edits automatically flag linked flashcards as `STALE`                                  |
-
-## Coming soon
-
-| Feature                                | Description                                                                                      |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| 🤖 **AI-Powered Flashcard Generation** | AI generates flashcards from source notes, keeping your knowledge base up-to-date (paid feature) |
+双数据源：查询用快速的 JSON 索引，透明与恢复用每张卡片上的 YAML frontmatter。即使索引损坏，所有 SRS 数据仍保存在 Markdown 中，可以完整重建。
 
 ---
 
-## Who Is This For?
+## 功能
 
-- **Researchers & Academics** — Literature reviews, experimental protocols, paper notes. Stale detection catches when your understanding evolves.
-- **Technical Lifelong Learners** — Course notes, code snippets, architecture decisions. Markdown flashcards render code blocks, LaTeX, and tables natively.
-- **Medical & Law Students** — Dense memorization with rich formatting, diagrams, and embeds—exactly as your Obsidian notes already support.
-- **Obsidian Power Users** — You treat your vault as a long-term knowledge asset. Mnemoloop respects that with transparent, portable, future-proof data.
+| 功能 | 说明 |
+| --- | --- |
+| 🧠 **FSRS 调度** | 科学验证的间隔重复算法，用更少复习获得更好记忆 |
+| 📄 **一张卡片 = 一个文件** | 独立 Markdown 文件，可移植、可版本控制，不修改来源笔记 |
+| 📊 **学习仪表盘** | 热力图、牌组树、每日目标和记忆保持率 |
+| 🔒 **本地优先** | 核心功能完全离线，无遥测、无数据挖掘 |
+| 🏗️ **自愈数据** | JSON 索引 + YAML 双数据源，索引损坏可恢复 |
+| ⚡ **高性能** | 懒加载、防抖监听，面向 5 万张卡片优化 |
+| 📈 **学习统计** | 跟踪保持率、复习预测和累计进度 |
+| 📱 **移动端触控** | 左右滑动评分、点击翻面 |
+| 🔔 **失效检测** | 来源笔记修改后，关联卡片自动标记为 `STALE`（已失效） |
 
 ---
 
-## Getting Started
+## 安装
 
-### Installation
+### 手动安装（推荐用于本汉化版）
 
-1. Open **Settings → Community Plugins** in Obsidian
-2. Search for **"Mnemoloop"** and install
-3. Enable the plugin
+1. 直接下载本仓库根目录的 `main.js`、`manifest.json`、`styles.css`，或下载 `release/mnemoloop-zh-2.1.3.zip` 解压使用。
+2. 在仓库中创建目录：
 
-### Create Your First Flashcard
+   ```text
+   <你的仓库>/.obsidian/plugins/mnemoloop-zh/
+   ```
 
-Creating a card is modal-driven:
+3. 把三个文件放入该目录。
+4. 在 Obsidian 中打开 **设置 → 第三方插件**，关闭安全模式并启用 **Mnemoloop(中文版)**。
 
-- Open the **Command Palette** (`Ctrl/Cmd + P`) and run **Create flashcard** to open the flashcard form;
-- Right-click a note in the **File Explorer** and select **Create flashcard from file** to open the form with the source pre-filled with a link to that note;
-- Pick a **Basic**, **Sequence**, **Quiz**, or **Cloze** tab, enter your content, optionally assign one or more decks, and confirm.
+> **与官方版的关系**
+>
+> - 本版使用独立 ID `mnemoloop-zh`，安装目录是 `.obsidian/plugins/mnemoloop-zh/`，可以和官方 `mnemoloop` 并存；
+> - 两个插件会索引同一批卡片 Markdown 文件，同时启用会互相写 YAML 和调度数据，**不建议同时启用**；日常使用只启用一个；
+> - 从 2.1.2 或更早版本升级时，设置不会自动迁移。需要旧设置可把 `data.json` 从 `.obsidian/plugins/mnemoloop/` 复制到 `.obsidian/plugins/mnemoloop-zh/`；卡片文件本身不受影响。
 
-The card is saved as its own Markdown file in your flashcards directory and opened in the editor.
+### 从源码构建
 
-### Review
+```bash
+npm install --legacy-peer-deps
+npm run build
+```
 
-Open the **Command Palette** and run **"Open dashboard"** to see your learning stats and start a review session.
+构建产物：`main.js`、`manifest.json`、`styles.css`。
 
-During review:
+开发模式：
 
-- **Space** — Flip the card
-- **1 / 2 / 3 / 4** — Rate Again / Hard / Good / Easy
-- **U** — Undo last rating
+```bash
+npm run dev
+```
 
-### Decks & Organization
+---
 
-Organize flashcards into decks using YAML frontmatter:
+## 快速开始
+
+### 创建第一张卡片
+
+- 打开命令面板（`Ctrl/⌘ + P`），执行 **创建卡片**；
+- 或在文件管理器中右键一篇笔记，选择 **从文件创建卡片**，来源会自动填入该笔记的链接；
+- 选择 **基础 / 排序 / 选择 / 填空 / 遮挡** 标签页，填写内容，可分配一个或多个牌组，然后确认。
+
+卡片会保存为独立 Markdown 文件并自动打开。
+
+### 复习
+
+打开命令面板，执行 **打开仪表盘**，查看学习统计并开始复习。
+
+复习时：
+
+- **空格** —— 翻面 / 继续
+- **1 / 2 / 3 / 4** —— 重来 / 困难 / 良好 / 简单
+- **U** 或左上角按钮 —— 撤销上次评分
+- 移动端：左右滑动评分，点击翻面
+
+### 牌组
+
+用 YAML frontmatter 给卡片分配牌组：
 
 ```yaml
 ---
 decks:
-  - Maths::Linear algebra
-  - CS::Algorithms
+  - 数学::线性代数
+  - 计算机::算法
 ---
 ```
 
-A card can belong to **multiple decks** — in the flashcard form, enter them as a comma-separated list (e.g. `Maths::Linear algebra, CS::Algorithms`). Use `::` for nested decks. Cards without a deck appear under **Uncategorized** in the deck tree.
+一张卡片可以属于多个牌组。在卡片表单中用逗号分隔，例如 `数学::线性代数, 计算机::算法`；用 `::` 表示嵌套牌组。没有牌组的卡片会显示在牌组树的 **未分类** 下。
 
 ---
 
-## Flashcard Format
+## 卡片格式
 
-Each flashcard is a Markdown file with YAML frontmatter:
+每张卡片都是一个带 YAML frontmatter 的 Markdown 文件：
 
 ```markdown
 ---
 uuid: 550e8400-e29b-41d4-a716-446655440000
-source: '[[Biology/Cell biology.md]]'
+source: '[[生物学/细胞生物学.md]]'
 status: ACTIVE
 decks:
-  - Biology::Cell structure
+  - 生物::细胞结构
 card_type: basic
 stability: 4.5
 difficulty: 3.2
@@ -137,122 +147,88 @@ last_review: 2026-05-10T09:00:00Z
 due: 2026-05-15T09:00:00Z
 ---
 
-What is the powerhouse of the cell?
+细胞的能量工厂是什么？
 
 ?
 
-The mitochondrion.
+线粒体。
 ```
 
-The `card_type` field selects the card format (defaults to `basic`), and the `?` delimiter separates question from answer (configurable in settings). All SRS metadata lives in YAML—transparent, editable, and portable.
+`card_type` 选择卡片格式（默认 `basic`），`?` 是问答分隔符（可在设置中修改）。所有 SRS 元数据都保存在 YAML 中，透明、可编辑、可移植。
 
-### Card Types
+### 卡片类型
 
-Mnemoloop supports four card types. Pick one in the flashcard form, or set `card_type` in YAML when authoring cards by hand.
+#### 基础（Basic）
 
-#### Basic
+一个问题和一个答案，用分隔符（默认 `?`）分开，复习时翻面后手动评分。
 
-A question and an answer, separated by the marker (`?` by default). During review, flip the card to reveal the answer and rate it manually.
+#### 排序（Sequence）
 
-```markdown
----
-card_type: basic
----
+一个问题加一组有序步骤（至少两步）。复习时步骤会被打乱，拖动恢复正确顺序（移动端支持触摸拖动），按最终顺序自动评分。
 
-What is the powerhouse of the cell?
+#### 选择（Quiz）
 
-?
+一个问题加多个选项，正确选项用 `[x]` 标记。复习时选项会打乱，按选择自动评分。
 
-The mitochondrion.
-```
+#### 填空（Cloze）
 
-#### Sequence
+用 `{{c1::答案}}`（可写 `{{c1::答案::提示}}`）标记挖空。复习时逐个揭示，手动评分。
 
-A question plus an ordered list of steps (at least two). During review the steps are shuffled — drag them back into the correct order (drag works with touch on mobile). The card is scored automatically based on the final order.
+#### 遮挡（Occlusion）
 
-```markdown
----
-card_type: sequence
----
-
-Arrange these steps in order.
-
-?
-
-- Receive the signal
-- Transcribe the DNA
-- Translate the mRNA
-```
-
-#### Quiz
-
-A question with multiple-choice options, where the correct option is marked with `[x]`. During review the options are shuffled and the card is scored automatically based on your selection.
-
-```markdown
----
-card_type: quiz
----
-
-What is the powerhouse of the cell?
-
-?
-
-- [ ] Nucleus
-- [x] Mitochondrion
-- [ ] Ribosome
-```
-
-#### Cloze
-
-Text with one or more deletions written as `{{c1::answer}}` (optionally `{{c1::answer::hint}}`). During review each deletion is revealed one at a time; rate the card manually.
-
-```markdown
----
-card_type: cloze
----
-
-The powerhouse of the cell is the {{c1::mitochondrion}}.
-```
-
-## Available Commands
-
-| Context   | Command                    | Description                                                      |
-| --------- | -------------------------- | ---------------------------------------------------------------- |
-| Palette   | Open dashboard             | Open the learning dashboard                                      |
-| Palette   | Create flashcard           | Open the flashcard form to create a new card                     |
-| File menu | Create flashcard from file | Open the flashcard form pre-linked to the selected Markdown file |
+在一张图片上绘制多个遮挡区域，每个区域对应一个答案；复习时逐个选择区域并作答。
 
 ---
 
-## Contributing
+## 命令
+
+| 位置 | 命令 | 说明 |
+| --- | --- | --- |
+| 命令面板 | 打开仪表盘 | 打开学习仪表盘 |
+| 命令面板 | 创建卡片 | 打开卡片表单 |
+| 文件菜单 | 从文件创建卡片 | 打开表单并预填所选 Markdown 文件的链接 |
+
+---
+
+## 语言与本地化
+
+- 界面语言默认跟随 Obsidian 的语言设置。
+- 可在 **设置 → Mnemoloop(中文版) → Language** 中切换为 English 或简体中文。
+- 切换后仪表盘、复习、管理、统计等界面会立即更新；Obsidian 的命令名称和设置页标签可能需要重新打开设置或重启 Obsidian 才会完全更新。
+
+---
+
+## 参与开发
 
 ```bash
-yarn install
-yarn dev       # development with hot reload
-yarn test          # run the test suite
-yarn lint      # lint TypeScript and Svelte files
-yarn build     # production build
-yarn format    # format code with Prettier
+npm install --legacy-peer-deps
+npm run dev        # 开发模式，热重载
+npm test -- --run  # 运行测试
+npm run lint       # 检查 TypeScript 与 Svelte
+npm run build      # 生产构建
+npm run format     # Prettier 格式化
 ```
 
-For detailed architecture guidance, code patterns, and conventions, see [`AGENTS.md`](./AGENTS.md).
+架构说明、代码模式与约定见 [`AGENTS.md`](./AGENTS.md)。
 
 ---
 
-## Tech Stack
+## 技术栈
 
-- **TypeScript** — Strict mode, path aliases (`@/*`)
-- **Svelte 5** — Runes-based reactive UI (`$props`, `$state`, `$effect`)
-- **Vite** — Build toolchain with auto-copy to Obsidian plugin directory
-- **FSRS** — `ts-fsrs` for state-of-the-art spaced repetition scheduling
-- **Vitest** — Unit testing with mocked Obsidian API
-- **Zod** — Runtime schema validation
-- **bits-ui** — Headless Svelte UI primitives
-- **@dnd-kit/svelte** — Drag-and-drop for reordering sequence cards
-- **layerchart** — Data visualization for the dashboard
+- **TypeScript** —— 严格模式、路径别名 `@/*`
+- **Svelte 5** —— Runes 响应式 UI
+- **Vite** —— 构建并自动复制到 Obsidian 插件目录
+- **FSRS** —— 使用 `ts-fsrs` 进行调度
+- **Vitest** —— 单元测试，模拟 Obsidian API
+- **Zod** —— 运行时 schema 校验
+- **bits-ui** —— 无头 Svelte UI 原语
+- **@dnd-kit/svelte** —— 排序卡片的拖放
+- **layerchart** —— 仪表盘数据可视化
 
 ---
 
-## License
+## 许可证
 
-[MIT](https://github.com/Marco-Pozzecco/obs-knowledge-accelerator/blob/main/LICENSE.md) © 2026 Marco Pozzecco
+[MIT](./LICENSE.md) © 2026 Marco Pozzecco
+
+简体中文本地化部分由 allensky708 维护，同样以 MIT 协议发布。

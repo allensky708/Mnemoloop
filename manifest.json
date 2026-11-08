@@ -1,9 +1,9 @@
 {
-	"id": "mnemoloop",
-	"name": "Mnemoloop",
-	"version": "2.1.2",
+	"id": "mnemoloop-zh",
+	"name": "Mnemoloop(中文版)",
+	"version": "2.1.3",
 	"minAppVersion": "1.13.0",
-	"description": "本地优先的间隔重复插件，使用 FSRS 调度，不修改你的笔记。Local-first spaced repetition with FSRS scheduling that never touches your notes.",
+	"description": "本地优先的间隔重复插件，使用 FSRS 调度，不修改你的笔记。",
 	"author": "Marco Pozzecco, allensky708",
 	"authorUrl": "https://github.com/allensky708",
 	"isDesktopOnly": false

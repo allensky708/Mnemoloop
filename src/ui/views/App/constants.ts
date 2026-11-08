@@ -1,1 +1,1 @@
-export const APP_VIEW = 'mnemoloop-home';
+export const APP_VIEW = 'mnemoloop-zh-home';

@@ -32,7 +32,7 @@ export class AppView extends ItemView implements HoverParent {
 	 * Returns the display name for the view
 	 */
 	getDisplayText(): string {
-		return 'Mnemoloop';
+		return 'Mnemoloop(中文版)';
 	}
 
 	/**

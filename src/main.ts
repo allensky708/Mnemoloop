@@ -209,7 +209,7 @@ export default class MnemoloopPlugin extends Plugin {
 	}
 
 	private initializeRibbonIcon() {
-		this.ribbonIcon = this.addRibbonIcon('orbit', 'Mnemoloop', () => {
+		this.ribbonIcon = this.addRibbonIcon('orbit', 'Mnemoloop(中文版)', () => {
 			void this.activateView();
 		});
 	}

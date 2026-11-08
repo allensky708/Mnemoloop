@@ -1,17 +1,17 @@
 {
-	"name": "mnemoloop",
-	"version": "2.1.2",
-	"description": "An obsidian plugin for spaced repetition learning",
-	"homepage": "https://github.com/Marco-Pozzecco/mnemoloop-plugin#readme",
+	"name": "mnemoloop-zh",
+	"version": "2.1.3",
+	"description": "Mnemoloop 简体中文版：本地优先的 FSRS 间隔重复 Obsidian 插件。",
+	"homepage": "https://github.com/allensky708/Mnemoloop#readme",
 	"bugs": {
-		"url": "https://github.com/Marco-Pozzecco/mnemoloop-plugin/issues"
+		"url": "https://github.com/allensky708/Mnemoloop/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+ssh://git@github.com/Marco-Pozzecco/mnemoloop-plugin.git"
+		"url": "git+https://github.com/allensky708/Mnemoloop.git"
 	},
 	"license": "MIT",
-	"author": "Marco Pozzecco",
+	"author": "Marco Pozzecco, allensky708",
 	"type": "module",
 	"main": "main.js",
 	"scripts": {
